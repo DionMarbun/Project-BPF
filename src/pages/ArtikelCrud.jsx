@@ -25,7 +25,7 @@ const ArtikelListWithEdit = () => {
     {
       judul: "Panduan Menyiapkan Acara Seminar",
       konten: "Siapkan rundown, undangan, dan perlengkapan presentasi.",
-      tanggal: "2025-05-13",
+      tanggal: "2025-05-16",
     },
   ]);
 
