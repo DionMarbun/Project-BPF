@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Rina Andayani",
+    "role": "Manager Operasional",
+    "image": "https://randomuser.me/api/portraits/women/44.jpg",
+    "email": "rina.andayani@grahapena.co.id",
+    "phone": "0812-3456-7890"
+  },
+  {
+    "id": 2,
+    "name": "Fajar Nugroho",
+    "role": "Koordinator Event",
+    "image": "https://randomuser.me/api/portraits/men/52.jpg",
+    "email": "fajar.nugroho@grahapena.co.id",
+    "phone": "0821-4567-8901"
+  },
+  {
+    "id": 3,
+    "name": "Desi Rahmawati",
+    "role": "Staf Booking",
+    "image": "https://randomuser.me/api/portraits/women/68.jpg",
+    "email": "desi.rahmawati@grahapena.co.id",
+    "phone": "0852-9876-1234"
+  },
+  {
+    "id": 4,
+    "name": "Agus Prasetyo",
+    "role": "Teknisi Ruangan",
+    "image": "https://randomuser.me/api/portraits/men/33.jpg",
+    "email": "agus.prasetyo@grahapena.co.id",
+    "phone": "0838-1122-3344"
+  },
+  {
+    "id": 5,
+    "name": "Siti Marlina",
+    "role": "Administrasi",
+    "image": "https://randomuser.me/api/portraits/women/12.jpg",
+    "email": "siti.marlina@grahapena.co.id",
+    "phone": "0813-3344-5566"
+  },
+  {
+    "id": 6,
+    "name": "Yusuf Hidayat",
+    "role": "Keamanan Gedung",
+    "image": "https://randomuser.me/api/portraits/men/45.jpg",
+    "email": "yusuf.hidayat@grahapena.co.id",
+    "phone": "0877-4433-2211"
+  },
+  {
+    "id": 7,
+    "name": "Tania Kartika",
+    "role": "Staf Marketing",
+    "image": "https://randomuser.me/api/portraits/women/37.jpg",
+    "email": "tania.kartika@grahapena.co.id",
+    "phone": "0819-8877-6655"
+  },
+  {
+    "id": 8,
+    "name": "Dedi Kurniawan",
+    "role": "Kebersihan & Pemeliharaan",
+    "image": "https://randomuser.me/api/portraits/men/22.jpg",
+    "email": "dedi.kurniawan@grahapena.co.id",
+    "phone": "0822-9988-7766"
+  }
+]

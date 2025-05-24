@@ -1,0 +1,293 @@
+[
+    {
+      "id": 1,
+      "name": "Ruang Meja Meeting LT 10",
+      "price": "5 Juta",
+      "capacity": "50 Orang",
+      "facilities": {
+        "meja": "Meja Meeting Kayu",
+        "kursi": "Kursi Kulit Premium",
+        "sound_system_mic": false,
+        "panggung": false,
+        "ruang_rias_keluarga": false,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 10,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 10,
+        "height": 3,
+        "depth": 15
+      },
+      "image": "https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/225/2025/01/19/1-rapat-1705021170.jpg",
+      "status": "Booked",
+      "customer_name": "John Doe",
+      "booking_date": "2025-04-20",
+      "duration": "3 hours"
+    },
+    {
+      "id": 2,
+      "name": "Ruang Kursi Seminar LT 9",
+      "price": "7 Juta",
+      "capacity": "100 Orang",
+      "facilities": {
+        "meja": false,
+        "kursi": "Kursi Seminar Lipat",
+        "sound_system_mic": true,
+        "panggung": false,
+        "ruang_rias_keluarga": false,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 9,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 12,
+        "height": 3.5,
+        "depth": 18
+      },
+      "image": "https://grahapenabatam.id/images/penaballroom.png",
+      "status": "Booked",
+      "customer_name": "Alice Smith",
+      "booking_date": "2025-04-21",
+      "duration": "5 hours"
+    },
+    {
+      "id": 3,
+      "name": "Ruang Sound System LT 8",
+      "price": "8 Juta",
+      "capacity": "150 Orang",
+      "facilities": {
+        "meja": false,
+        "kursi": "Kursi Plastik",
+        "sound_system_mic": true,
+        "panggung": true,
+        "ruang_rias_keluarga": false,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 8,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 15,
+        "height": 4,
+        "depth": 20
+      },
+      "image": "https://www.indovisual.co.id/wp-content/uploads/2022/08/Sound-System-pada-Aula-untuk-Pertunjukan-Orkestra-Musik.jpg",
+      "status": "Booked",
+      "customer_name": "Bob Johnson",
+      "booking_date": "2025-04-19",
+      "duration": "8 hours"
+    },
+    {
+      "id": 4,
+      "name": "Ruang Panggung LT 7",
+      "price": "10 Juta",
+      "capacity": "200 Orang",
+      "facilities": {
+        "meja": true,
+        "kursi": "Kursi Kayu",
+        "sound_system_mic": true,
+        "panggung": true,
+        "ruang_rias_keluarga": true,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 7,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 18,
+        "height": 4.5,
+        "depth": 22
+      },
+      "image": "https://grahapenabatam.id/images/penahall4.png",
+      "status": "Booked",
+      "customer_name": "Sarah Lee",
+      "booking_date": "2025-04-18",
+      "duration": "6 hours"
+    },
+    {
+      "id": 5,
+      "name": "Ruang VIP LT 6",
+      "price": "15 Juta",
+      "capacity": "50 Orang",
+      "facilities": {
+        "meja": "Meja Kaca VIP",
+        "kursi": "Sofa Kulit VIP",
+        "sound_system_mic": true,
+        "panggung": false,
+        "ruang_rias_keluarga": true,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 6,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 10,
+        "height": 3.2,
+        "depth": 14
+      },
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8SyHJC6Ms8dVCm28n69j2UWythGye3ifnZg&s",
+      "status": "Booked",
+      "customer_name": "David Green",
+      "booking_date": "2025-04-17",
+      "duration": "4 hours"
+    },
+    {
+      "id": 6,
+      "name": "Ruang Rias Keluarga LT 5",
+      "price": "6 Juta",
+      "capacity": "30 Orang",
+      "facilities": {
+        "meja": "Meja Rias",
+        "kursi": "Kursi Sofa",
+        "sound_system_mic": false,
+        "panggung": false,
+        "ruang_rias_keluarga": true,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 5,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 9,
+        "height": 3,
+        "depth": 12
+      },
+      "image": "https://furniturejogja.com/wp-content/uploads/2022/11/Ruang-rias-dengan-konsep-elegan.jpg",
+      "status": "Available",
+      "customer_name": "Nina Miller",
+      "booking_date": "2025-04-23",
+      "duration": "2 hours"
+    },
+    {
+      "id": 7,
+      "name": "Ruang AC Full LT 4",
+      "price": "7,5 Juta",
+      "capacity": "80 Orang",
+      "facilities": {
+        "meja": "Meja Kayu Minimalis",
+        "kursi": "Kursi Sofa",
+        "sound_system_mic": true,
+        "panggung": false,
+        "ruang_rias_keluarga": false,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 4,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 12,
+        "height": 3.5,
+        "depth": 16
+      },
+      "image": "https://asset2.olympicfurniture.co.id/NEWS/2024/4/Desain%20Ruang%20Keluarga%20Sofa%20Letter%20L.jpg",
+      "status": "Available",
+      "customer_name": "James White",
+      "booking_date": "2025-04-24",
+      "duration": "3 hours"
+    },
+    {
+      "id": 8,
+      "name": "Ruang Workshop LT 3",
+      "price": "5,8 Juta",
+      "capacity": "120 Orang",
+      "facilities": {
+        "meja": "Meja Kelas",
+        "kursi": "Kursi Seminar",
+        "sound_system_mic": true,
+        "panggung": false,
+        "ruang_rias_keluarga": false,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 3,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 14,
+        "height": 4,
+        "depth": 20
+      },
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLQoSqFFtg3mvZoC9326zy3E5jy0YwfpI6CA&s",
+      "status": "Booked",
+      "customer_name": "Maria Robinson",
+      "booking_date": "2025-04-22",
+      "duration": "7 hours"
+    },
+    {
+      "id": 9,
+      "name": "Ruang Auditorium LT 2",
+      "price": "20 Juta",
+      "capacity": "300 Orang",
+      "facilities": {
+        "meja": false,
+        "kursi": "Kursi Auditorium",
+        "sound_system_mic": true,
+        "panggung": true,
+        "ruang_rias_keluarga": true,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 2,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 20,
+        "height": 5,
+        "depth": 25
+      },
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0CvKgbvANf4qxCApdqzyHEDrEJD1W5us3kQ&s",
+      "status": "Booked",
+      "customer_name": "Linda Carter",
+      "booking_date": "2025-04-15",
+      "duration": "6 hours"
+    },
+    {
+      "id": 10,
+      "name": "Ruang Rapat Eksekutif LT 1",
+      "price": "12 Juta",
+      "capacity": "25 Orang",
+      "facilities": {
+        "meja": "Meja Marmer",
+        "kursi": "Kursi Kulit Eksekutif",
+        "sound_system_mic": true,
+        "panggung": false,
+        "ruang_rias_keluarga": false,
+        "full_ac": true
+      },
+      "location": {
+        "building": "Graha Pena Pekanbaru",
+        "floor": 1,
+        "city": "Pekanbaru"
+      },
+      "dimensions": {
+        "width": 7,
+        "height": 5,
+        "depth": 10
+      },
+      "image": "https://grahapenabatam.id/images/virtualoffice1.jpg",
+      "status": "Available",
+      "customer_name": "Steve Taylor",
+      "booking_date": "2025-04-25",
+      "duration": "4 hours"
+    }
+  ]
+  

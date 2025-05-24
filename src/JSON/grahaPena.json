@@ -1,0 +1,502 @@
+[
+  {
+    "id": 1,
+    "name": "Ruang Meja Meeting LT 10",
+    "price": "5 Juta",
+    "capacity": "50 Orang",
+    "facilities": {
+      "meja": "Meja Meeting Kayu",
+      "kursi": "Kursi Kulit Premium",
+      "sound_system_mic": false,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 10,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 10,
+      "height": 3,
+      "depth": 15
+    },
+    "image": "https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/225/2025/01/19/1-rapat-1705021170.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Ruang Kursi Seminar LT 9",
+    "price": "7 Juta",
+    "capacity": "100 Orang",
+    "facilities": {
+      "meja": false,
+      "kursi": "Kursi Seminar Lipat",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 9,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 12,
+      "height": 3.5,
+      "depth": 18
+    },
+    "image": "https://grahapenabatam.id/images/penaballroom.png"
+  },
+  {
+    "id": 3,
+    "name": "Ruang Sound System LT 8",
+    "price": "8 Juta",
+    "capacity": "150 Orang",
+    "facilities": {
+      "meja": false,
+      "kursi": "Kursi Plastik",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 8,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 15,
+      "height": 4,
+      "depth": 20
+    },
+    "image": "https://www.indovisual.co.id/wp-content/uploads/2022/08/Sound-System-pada-Aula-untuk-Pertunjukan-Orkestra-Musik.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Ruang Panggung LT 7",
+    "price": "10 Juta",
+    "capacity": "200 Orang",
+    "facilities": {
+      "meja": true,
+      "kursi": "Kursi Kayu",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 7,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 18,
+      "height": 4.5,
+      "depth": 22
+    },
+    "image": "https://grahapenabatam.id/images/penahall4.png"
+  },
+  {
+    "id": 5,
+    "name": "Ruang VIP LT 6",
+    "price": "15 Juta",
+    "capacity": "50 Orang",
+    "facilities": {
+      "meja": "Meja Kaca VIP",
+      "kursi": "Sofa Kulit VIP",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 6,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 10,
+      "height": 3.2,
+      "depth": 14
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8SyHJC6Ms8dVCm28n69j2UWythGye3ifnZg&s"
+  },
+  {
+    "id": 6,
+    "name": "Ruang Rias Keluarga LT 5",
+    "price": "6 Juta",
+    "capacity": "30 Orang",
+    "facilities": {
+      "meja": "Meja Rias",
+      "kursi": "Kursi Sofa",
+      "sound_system_mic": false,
+      "panggung": false,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 5,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 9,
+      "height": 3,
+      "depth": 12
+    },
+    "image": "https://furniturejogja.com/wp-content/uploads/2022/11/Ruang-rias-dengan-konsep-elegan.jpg"
+  },
+  {
+    "id": 7,
+    "name": "Ruang AC Full LT 4",
+    "price": "7,5 Juta",
+    "capacity": "80 Orang",
+    "facilities": {
+      "meja": "Meja Kayu Minimalis",
+      "kursi": "Kursi Sofa",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 4,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 12,
+      "height": 3.5,
+      "depth": 16
+    },
+    "image": "https://asset2.olympicfurniture.co.id/NEWS/2024/4/Desain%20Ruang%20Keluarga%20Sofa%20Letter%20L.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Ruang Workshop LT 3",
+    "price": "5,8 Juta",
+    "capacity": "120 Orang",
+    "facilities": {
+      "meja": "Meja Kelas",
+      "kursi": "Kursi Seminar",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 3,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 14,
+      "height": 4,
+      "depth": 20
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLQoSqFFtg3mvZoC9326zy3E5jy0YwfpI6CA&s"
+  },
+  {
+    "id": 9,
+    "name": "Ruang Auditorium LT 2",
+    "price": "20 Juta",
+    "capacity": "300 Orang",
+    "facilities": {
+      "meja": false,
+      "kursi": "Kursi Auditorium",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 2,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 20,
+      "height": 5,
+      "depth": 25
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0CvKgbvANf4qxCApdqzyHEDrEJD1W5us3kQ&s"
+  },
+  {
+    "id": 10,
+    "name": "Ruang Rapat Eksekutif LT 1",
+    "price": "12 Juta",
+    "capacity": "25 Orang",
+    "facilities": {
+      "meja": "Meja Marmer",
+      "kursi": "Kursi Kulit Eksekutif",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 1,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 7,
+      "height": 5,
+      "depth": 10
+    },
+    "image": "https://grahapenabatam.id/images/virtualoffice1.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Ruang Seminar LT 11",
+    "price": "9,5 Juta",
+    "capacity": "250 Orang",
+    "facilities": {
+      "meja": "Meja Seminar",
+      "kursi": "Kursi Lipat",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 11,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 20,
+      "height": 5,
+      "depth": 25
+    },
+    "image": "https://grahapenabatam.id/images/penahall5.png"
+  },
+  {
+    "id": 12,
+    "name": "Ruang Training LT 10",
+    "price": "7,2 Juta",
+    "capacity": "180 Orang",
+    "facilities": {
+      "meja": "Meja Kelas",
+      "kursi": "Kursi Ergonomis",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 10,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 18,
+      "height": 5,
+      "depth": 23
+    },
+    "image": "https://grahapenabatam.id/images/executive3.png"
+  },
+  {
+    "id": 13,
+    "name": "Ruang Konferensi LT 9",
+    "price": "10 Juta",
+    "capacity": "300 Orang",
+    "facilities": {
+      "meja": "Meja Konferensi Kayu",
+      "kursi": "Kursi Konferensi Premium",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 9,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 22,
+      "height": 5,
+      "depth": 25
+    },
+    "image": "https://hompremiereabepura.wordpress.com/wp-content/uploads/2018/12/ruang-meeting-hom-premiere-abepura.jpg?w=1200"
+  },
+  {
+    "id": 14,
+    "name": "Ruang VIP Meeting LT 8",
+    "price": "8 Juta",
+    "capacity": "50 Orang",
+    "facilities": {
+      "meja": "Meja Marmer VIP",
+      "kursi": "Sofa Kulit Eksklusif",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 8,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 10,
+      "height": 5,
+      "depth": 15
+    },
+    "image": "https://grahapenabatam.id/images/executive4.png"
+  },
+  {
+    "id": 15,
+    "name": "Ruang Diskusi LT 7",
+    "price": "6,5 Juta",
+    "capacity": "100 Orang",
+    "facilities": {
+      "meja": "Meja Bulat Diskusi",
+      "kursi": "Kursi Kayu Nyaman",
+      "sound_system_mic": false,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 7,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 10,
+      "height": 5,
+      "depth": 12
+    },
+    "image": "https://cms.workfrom.id/wp-content/uploads/2023/03/7.-jenis-meeting-room.jpg"
+  },
+  {
+    "id": 16,
+    "name": "Ruang Presentasi LT 6",
+    "price": "7,8 Juta",
+    "capacity": "120 Orang",
+    "facilities": {
+      "meja": "Meja Kayu Modern",
+      "kursi": "Kursi Kantor Nyaman",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 6,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 18,
+      "height": 5,
+      "depth": 22
+    },
+    "image": "https://www.hariansuara.com/files/posts/15908/meeting_room-1140x760.jpg"
+  },
+  {
+    "id": 17,
+    "name": "Ruang Auditorium LT 5",
+    "price": "15 Juta",
+    "capacity": "500 Orang",
+    "facilities": {
+      "meja": false,
+      "kursi": "Kursi Auditorium",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 5,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 25,
+      "height": 7,
+      "depth": 30
+    },
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzPIusBUeHG6r4elWm6L5RCfSJYhI20Ta6iQ&s"
+  },
+  {
+    "id": 18,
+    "name": "Ruang Co-Working LT 4",
+    "price": "5,7 Juta",
+    "capacity": "80 Orang",
+    "facilities": {
+      "meja": "Meja Co-Working Kayu",
+      "kursi": "Kursi Startup Ergonomis",
+      "sound_system_mic": false,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 4,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 15,
+      "height": 5,
+      "depth": 20
+    },
+    "image": "https://snapy.co.id/gambar/artikel/fasilitas-lengkap-dan-nyaman-bekerja-di-coworking-space1.jpg"
+  },
+  {
+    "id": 19,
+    "name": "Ruang Workshop LT 3",
+    "price": "6 Juta",
+    "capacity": "150 Orang",
+    "facilities": {
+      "meja": "Meja Panjang Workshop",
+      "kursi": "Kursi Kayu Klasik",
+      "sound_system_mic": true,
+      "panggung": false,
+      "ruang_rias_keluarga": false,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 3,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 18,
+      "height": 5,
+      "depth": 25
+    },
+    "image": "https://xwork.co/blog/wp-content/uploads/2016/09/tempat-workshop-yang-strategis-2.jpg"
+  },
+  {
+    "id": 20,
+    "name": "Ruang Event Hall LT 2",
+    "price": "12 Juta",
+    "capacity": "400 Orang",
+    "facilities": {
+      "meja": false,
+      "kursi": "Kursi Lipat Event",
+      "sound_system_mic": true,
+      "panggung": true,
+      "ruang_rias_keluarga": true,
+      "full_ac": true
+    },
+    "location": {
+      "building": "Graha Pena Pekanbaru",
+      "floor": 2,
+      "city": "Pekanbaru"
+    },
+    "dimensions": {
+      "width": 20,
+      "height": 5,
+      "depth": 25
+    },
+    "image": "https://ruangrama.com/wp-content/uploads/2025/02/1RR-199.jpg"
+  }
+]
