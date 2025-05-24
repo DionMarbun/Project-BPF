@@ -12,7 +12,7 @@ export default function Sidebar() {
           id="logo-title"
           className="font-poppins-extrabold text-[48px] text-gray-900"
         >
-          Dasboard{" "}
+          Dasboard {" "}
           <b id="logo-dot" className="text-cornflowerblue">
             .
           </b>

@@ -116,7 +116,7 @@ export default function ListMenu(){
                                 id="menu-5" 
                                 to = "/Error403"
                                 className={menuClass2}>
-                                    <BiErrorCircle />Error403
+                                    <BiErrorCircle />Error saja
                                     </NavLink>
                               </li>
                         </ul>
