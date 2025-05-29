@@ -1,16 +1,53 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { FaShoppingCart, FaTruck, FaBan, FaDollarSign } from "react-icons/fa";
 import PageHeader from "../components/PageHeader";
 
 export default function Dashboard() {
+    const [quote, setQuote] = useState("");
+    const [error, setError] = useState(null);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            axios
+                .get("https://api.adviceslip.com/advice")
+                .then((res) => {
+                    setQuote(res.data.slip.advice);
+                    setError(null);
+                })
+                .catch(() => {
+                    setError("Gagal mengambil kutipan motivasi.");
+                });
+        }, 100);
+
+        return () => clearTimeout(timeout);
+    }, [refreshTrigger]);
+
     return (
         <div id="dashboard-container" className="bg-gray-100 min-h-screen p-6">
             <PageHeader
                 title="Dashboard"
                 breadcrumb={['Dashboard', 'Order List']}
-            >
+            />
 
-            </PageHeader>
+            {/* Quote Section */}
+            <div className="bg-white p-4 rounded shadow-md text-center mb-6">
+                <h2 className="text-lg font-semibold mb-2">Motivational Quote</h2>
+                {error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : (
+                    <p className="italic text-gray-700">"{quote}"</p>
+                )}
+                <button
+                    onClick={() => setRefreshTrigger(prev => prev + 1)}
+                    className="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                    Refresh Quote
+                </button>
+            </div>
 
+            {/* Dashboard Cards */}
             <div id="dashboard-grid" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
                 {/* Orders Section */}
                 <div className="bg-white rounded-lg shadow-md p-4 text-center">

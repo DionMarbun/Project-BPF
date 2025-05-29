@@ -49,6 +49,9 @@ const LowonganList = React.lazy(() => import("./pages/LowonganList"));
 const FAQList = React.lazy(() => import("./pages/FAQList"));
 const ArtikelCrud  = React.lazy(() => import("./pages/ArtikelCrud"));
 
+const ReservasiDetail = React.lazy(() => import("./pages/ReservasiDetail"));
+const TeamManagementDetail = React.lazy(() => import("./pages/TeamManagementDetail"));
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -69,6 +72,9 @@ function App() {
                   <Route path="/LowonganList" element={<LowonganList />} />
                   <Route path="/FAQList" element={<FAQList />} />
                   <Route path="/ArtikelCrud" element={<ArtikelCrud />} />
+
+                  <Route path="/Reservasi/:id" element={<ReservasiDetail />} />
+                  <Route path="/TeamManagement/:id" element={<TeamManagementDetail />} />  
               </Route>
 
               <Route element={<AuthLayout/>}>

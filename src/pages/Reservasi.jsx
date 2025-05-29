@@ -1,6 +1,8 @@
 import { useState } from "react";
 import data from "../JSON/pemesanan.json";
 import { FaClipboardList, FaCheckCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
 
 export default function Orders() {
   const [search, setSearch] = useState("");
@@ -63,39 +65,44 @@ export default function Orders() {
                 <th className="p-4 font-bold">Durasi</th>
             </tr>
             </thead>
-            <tbody>
-              {filteredData.length > 0 ? (
-                filteredData.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="border-t border-gray-200 hover:bg-gray-50 transition duration-150 ease-in-out"
-                  >
-                    <td className="p-5 text-gray-800 font-medium">{item.name}</td>
-                    <td className="p-5 text-gray-700">Lantai {item.location.floor}</td>
-                    <td className="p-5">
-                      <span
-                        className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                          item.status === "Booked"
-                            ? "bg-red-100 text-red-600"
-                            : "bg-green-100 text-green-600"
-                        }`}
-                      >
-                        {item.status === "Booked" ? "Sudah Dipesan" : "Tersedia"}
-                      </span>
+              <tbody>
+                {filteredData.length > 0 ? (
+                  filteredData.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="border-t border-gray-200 hover:bg-gray-50 transition duration-150 ease-in-out"
+                    >
+                      <td className="p-5 text-gray-800 font-medium">
+                        <Link to={`/Reservasi/${item.id}`} className="text-emerald-500 hover:underline">
+                          {item.name}
+                        </Link>
+                      </td>
+                      <td className="p-5 text-gray-700">Lantai {item.location.floor}</td>
+                      <td className="p-5">
+                        <span
+                          className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                            item.status === "Booked"
+                              ? "bg-red-100 text-red-600"
+                              : "bg-green-100 text-green-600"
+                          }`}
+                        >
+                          {item.status === "Booked" ? "Sudah Dipesan" : "Tersedia"}
+                        </span>
+                      </td>
+                      <td className="p-5 text-gray-700">{item.customer_name}</td>
+                      <td className="p-5 text-gray-700">{item.booking_date}</td>
+                      <td className="p-5 text-gray-700">{item.duration}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" className="p-6 text-center text-gray-500">
+                      Tidak ada data ditemukan.
                     </td>
-                    <td className="p-5 text-gray-700">{item.customer_name}</td>
-                    <td className="p-5 text-gray-700">{item.booking_date}</td>
-                    <td className="p-5 text-gray-700">{item.duration}</td>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan="6" className="p-6 text-center text-gray-500">
-                    Tidak ada data ditemukan.
-                  </td>
-                </tr>
-              )}
-            </tbody>
+                )}
+              </tbody>
+
           </table>
         </div>
 
