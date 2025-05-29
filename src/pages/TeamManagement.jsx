@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import teamData from "../JSON/team.json"; // Pastikan data JSON memuat field "image", "name", "role", "email", "phone"
+import { Link } from "react-router-dom";
 
 export default function TeamManagement() {
   const [search, setSearch] = useState("");
@@ -45,7 +46,9 @@ export default function TeamManagement() {
                       className="w-10 h-10 rounded-full object-cover"
                     />
                   </td>
-                  <td className="p-4 font-medium text-gray-800">{member.name}</td>
+                  <Link to={`/TeamManagement/${member.id}`} className="text-blue-600 hover:underline">
+                    {member.name}
+                  </Link>
                   <td className="p-4">{member.role}</td>
                   <td className="p-4">{member.email}</td>
                   <td className="p-4">{member.phone}</td>
