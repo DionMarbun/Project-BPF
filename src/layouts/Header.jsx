@@ -4,41 +4,45 @@ import { SlSettings } from "react-icons/sl";
 
 export default function Header() {
     return (
-        <div id="header-container" className="flex justify-between items-center p-4">
-            {/* Search Bar */}
-            <div id="search-bar" className="relative w-full max-w-lg">
-                <input
-                    id="search-input" className="border border-gray-100 p-2 pr-10 bg-white w-full max-w-lg rounded-md outline-none"
-                    type="text"
-                    placeholder="Search Here..."
-                />
-                <FaSearch id="search-icon" className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-300"/>
-            </div>
+        <div
+            id="header-container"
+            className="flex justify-between items-center pl-6 pr-6 py-4 bg-gray-100 border-b"
+        >
+            {/* Title */}
+            <h1 className="text-xl font-semibold text-gray-900">Dashboard</h1>
 
-            {/* Icon & Profile Section */}
-            <div id="icons-container" className="flex items-center space-x-4">
+            {/* Search + Icons */}
+            <div className="flex items-center space-x-8">
+                {/* Search Field */}
+                <div className="relative">
+                    <input
+                        id="search-input"
+                        type="text"
+                        placeholder="Search"
+                        className="border border-gray-300 bg-white pl-4 pr-10 py-2 rounded-full shadow-sm outline-none text-sm"
+                    />
+                    <FaSearch className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                </div>
+
                 {/* Icons */}
-                <div id="notification-icon" className="relative p-3 bg-blue-100 rounded-2xl text-blue-500 cursor-pointer">
-                    <FaBell />
-                    <span id="notification-badge" className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-blue-200 rounded-full px-2 py-1 text-xs">50</span>
+                <div className="flex items-center space-x-4">
+                    <div className="relative cursor-pointer">
+                        <FaBell className="text-gray-500 text-lg" />
+                        <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                            5
+                        </span>
+                    </div>
+                    <FcAreaChart className="text-xl cursor-pointer" />
+                    <SlSettings className="text-gray-600 text-lg cursor-pointer" />
                 </div>
-                <div id="chart-icon"className="p-3 bg-blue-100 rounded-2xl cursor-pointer">
-                    <FcAreaChart />
-                </div>
-                <div id="settings-icon" className="p-3 bg-red-100 rounded-2xl text-red-500 cursor-pointer">
-                    <SlSettings />
-                </div>
-             
 
-                {/* Profile Section */}
-                <div id="profile-container" className="flex items-center space-x-4 border-l pl-4 border-gray-300">
-                    <span id="profile-text">
-                        Hello, <b>Fikri Muhaffizh</b>
-                    </span>
+                {/* Profile Info */}
+                <div className="flex items-center space-x-3 pl-4 border-l border-gray-300">
+                    <span className="text-sm text-gray-700">Hello, <b>Dion</b></span>
                     <img
-                        id="profile-avatar"
                         src="https://avatar.iran.liara.run/public/28"
-                        className="w-10 h-10 rounded-full"
+                        className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                        alt="User Avatar"
                     />
                 </div>
             </div>

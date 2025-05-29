@@ -50,13 +50,6 @@ export default function Sidebar() {
             src="https://avatar.iran.liara.run/public/28"
           />
         </div>
-
-        <span id="footer-brand" className="font-bold text-gray-400">
-           Admin Dashboard
-        </span>
-        <p id="footer-copyright" className="font-light text-gray-400">
-          &copy; 2025 All Right Reserved
-        </p>
       </div>
     </div>
   );

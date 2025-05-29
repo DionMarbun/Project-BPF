@@ -1,62 +1,47 @@
 import { AiTwotonePlusCircle } from "react-icons/ai";
 import ListMenu from "./ListMenu";
+import sidebarBg from "../assets/img/sidebar-2.jpg";
+
 export default function Sidebar() {
   return (
-    <div
-      id="sidebar"
-      className="flex min-h-screen w-90 flex-col bg-white p-10 shadow-lg"
+    <aside
+      className="w-[230px] text-white min-h-screen flex flex-col justify-between bg-cover bg-center shadow-xl"
+      style={{
+        backgroundImage: `url(${sidebarBg})`,
+        backgroundColor: "rgba(0,0,0,0.6)",
+        backgroundBlendMode: "overlay",
+      }}
     >
       {/* Logo */}
-      <div id="sidebar-logo" className="flex flex-col">
-        <span
-          id="logo-title"
-          className="font-poppins-extrabold text-[48px] text-gray-900"
-        >
-          Dasboard {" "}
-          <b id="logo-dot" className="text-cornflowerblue">
-            .
-          </b>
-        </span>
-        <span id="logo-subtitle">Modern Admin Dashboard</span>
+      <div className="p-6 border-b border-white/20">
+        <h1 className="text-2xl font-bold uppercase tracking-wide">
+          GrahaPena<b className="text-yellow-400">.</b>
+        </h1>
+        <p className="text-sm opacity-70">Modern Admin Dashboard</p>
       </div>
 
-      {/* List Menu */}
-      <ListMenu />
+      {/* Menu */}
+      <div className="flex-1 px-4 py-6">
+        <ListMenu />
+      </div>
 
       {/* Footer */}
-      <div id="sidebar-footer" className="mt-auto">
-        <div
-          id="footer-card"
-          className="bg-cornflowerblue px-4 py-2 rounded-md shadow-lg mb-10 flex items-center"
-        >
-          <div id="footer-text" className="text-white text-sm">
-            <span>Please organize your menus through button below!</span>
-
-            <div
-              id="add-menu-button"
-              className="flex justify-center items-center p-2 mt-3 bg-white rounded-md space-x-2 cursor-pointer"
-            >
-              <span className="text-gray-600 flex items-center">
-                {" "}
-                <AiTwotonePlusCircle />
-                Add Menus
-              </span>
-            </div>
+      <div className="p-4 text-center text-sm border-t border-white/20 bg-black/40">
+        <div className="bg-white text-gray-800 p-3 rounded-lg shadow-md mb-4">
+          <div className="text-xs">Please organize your menus below</div>
+          <div className="mt-2 flex justify-center items-center gap-1 text-purple-700 text-sm font-semibold hover:text-purple-900 cursor-pointer">
+            <AiTwotonePlusCircle />
+            <span>Add Menus</span>
           </div>
-          <img
-            id="footer-avatar"
-            className="w-20 rounded-full"
-            src="https://avatar.iran.liara.run/public/28"
-          />
         </div>
-
-        <span id="footer-brand" className="font-bold text-gray-400">
-          Sedap Restaurant Admin Dashboard
-        </span>
-        <p id="footer-copyright" className="font-light text-gray-400">
-          &copy; 2025 All Right Reserved
-        </p>
+        <img
+          className="w-14 h-14 mx-auto rounded-full border-2 border-white mb-2"
+          src="https://avatar.iran.liara.run/public/28"
+          alt="Avatar"
+        />
+        <div className="font-semibold">Admin Dashboard</div>
+        <div className="text-xs opacity-70 mt-1">&copy; 2025 All Rights Reserved</div>
       </div>
-    </div>
+    </aside>
   );
 }
