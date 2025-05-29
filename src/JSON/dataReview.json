@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "nama": "John Doe",
+    "komentar": "Pelayanan sangat memuaskan!",
+    "rating": 5,
+    "tanggal": "2025-04-20"
+  },
+  {
+    "id": 2,
+    "nama": "Alice Smith",
+    "komentar": "Ruangan bersih dan nyaman.",
+    "rating": 4,
+    "tanggal": "2025-04-18"
+  },
+  {
+    "id": 3,
+    "nama": "Bob Johnson",
+    "komentar": "AC sedikit kurang dingin, tapi oke.",
+    "rating": 3,
+    "tanggal": "2025-04-15"
+  },
+  {
+    "id": 4,
+    "nama": "Maria Robinson",
+    "komentar": "Lokasi strategis dan fasilitas lengkap.",
+    "rating": 5,
+    "tanggal": "2025-04-10"
+  }
+]

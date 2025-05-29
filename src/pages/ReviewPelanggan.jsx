@@ -1,36 +1,11 @@
 import React, { useState } from "react";
-
-const dataReview = [
-  {
-    nama: "John Doe",
-    komentar: "Pelayanan sangat memuaskan!",
-    rating: 5,
-    tanggal: "2025-04-20",
-  },
-  {
-    nama: "Alice Smith",
-    komentar: "Ruangan bersih dan nyaman.",
-    rating: 4,
-    tanggal: "2025-04-18",
-  },
-  {
-    nama: "Bob Johnson",
-    komentar: "AC sedikit kurang dingin, tapi oke.",
-    rating: 3,
-    tanggal: "2025-04-15",
-  },
-  {
-    nama: "Maria Robinson",
-    komentar: "Lokasi strategis dan fasilitas lengkap.",
-    rating: 5,
-    tanggal: "2025-04-10",
-  },
-];
+import { Link } from "react-router-dom";
+import reviewData from "../JSON/dataReview.json"; // pastikan tidak ada spasi di nama file
 
 const ReviewList = () => {
   const [search, setSearch] = useState("");
 
-  const filtered = dataReview.filter((item) =>
+  const filtered = reviewData.filter((item) =>
     item.nama.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -62,7 +37,14 @@ const ReviewList = () => {
             <tbody>
               {filtered.map((item, idx) => (
                 <tr key={idx} className="border-t border-gray-200">
-                  <td className="p-4">{item.nama}</td>
+                  <td className="p-4">
+                    <Link
+                      to={`/ReviewPelanggan/${item.id}`}
+                      className="text-emerald-500 hover:text-emerald-600 underline"
+                    >
+                      {item.nama}
+                    </Link>
+                  </td>
                   <td className="p-4">{item.komentar}</td>
                   <td className="p-4">{item.rating} ⭐</td>
                   <td className="p-4">{item.tanggal}</td>

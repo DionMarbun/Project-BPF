@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import data from "../JSON/grahaPena.json";
 import { FaClipboardList, FaCheckCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 // Komponen Statistik Kartu
 const StatCard = ({ icon, label, value, color }) => (
@@ -99,7 +100,11 @@ export default function RoomsList() {
                 className="w-full sm:w-48 h-32 object-cover rounded-lg"
               />
               <div className="flex-1 space-y-2 text-gray-800">
-                <h3 className="text-xl font-bold">{item.name}</h3>
+                <h3 className="text-xl font-bold">
+                  <Link to={`/RoomsList/${item.id}`} className="text-emerald-400 hover:text-emerald-500">
+                    {item.name}
+                  </Link>
+                </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-sm text-gray-600">
                   <div>
                     <span className="font-semibold">Harga:</span> {item.price}

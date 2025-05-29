@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import axios from "axios"
 import data from '../JSON/grahaPena.json'
 
 export default function ReservasiDetail() {
