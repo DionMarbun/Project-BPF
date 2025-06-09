@@ -1,3 +1,8 @@
+import { MdPermMedia } from "react-icons/md"; 
+import { RiProfileLine } from "react-icons/ri"; 
+import { AiOutlineContacts } from "react-icons/ai"; 
+import { FcContacts } from "react-icons/fc"; 
+import { RiAdminFill } from "react-icons/ri"; 
 import { MdWork } from "react-icons/md";
 import { CgWorkAlt } from "react-icons/cg";
 import { MdArticle } from "react-icons/md";
@@ -60,6 +65,26 @@ export default function ListMenu() {
         <li>
           <NavLink to="/ArtikelCrud" className={menuClass}>
             <MdArticle /> Article
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/KontakMasuk" className={menuClass}>
+            <AiOutlineContacts /> Kontak Masuk
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/Role" className={menuClass}>
+            <RiAdminFill />Role Management
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/CompanyProfile" className={menuClass}>
+            <RiProfileLine />Company Profile
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/MediaGallery" className={menuClass}>
+            <MdPermMedia />Media Gallery
           </NavLink>
         </li>
         <li>

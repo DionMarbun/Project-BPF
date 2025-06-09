@@ -3,7 +3,8 @@ import { BsSun, BsMoon } from "react-icons/bs";
 
 export default function Header() {
     return (
-        <div className="fixed top-0 left-90 right-0 h-20 bg-white flex items-center justify-between px-6 border-b border-gray-200 z-50">
+    <div className="fixed top-0 left-[230px] right-0 h-20 bg-white flex items-center justify-between px-6 border-b border-gray-200 z-50">
+
             {/* Search Bar */}
             <div className="flex-1 max-w-xl relative">
                 <input
