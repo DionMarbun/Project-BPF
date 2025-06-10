@@ -16,9 +16,10 @@ import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 export default function ListMenu() {
-  const menuClass = ({ isActive }) =>
-    `flex items-center gap-3 rounded-md px-4 py-2 transition-all duration-200 
-    ${isActive ? "text-white font-semibold bg-white/10" : "text-gray-300 hover:bg-white/10 hover:text-white"}`;
+const menuClass = ({ isActive }) =>
+  `flex items-center gap-3 rounded-md px-4 py-2 transition-all duration-200 
+  ${isActive ? "text-white font-semibold bg-cyan-500" : "text-gray-300 hover:bg-cyan-500 hover:text-white"}`;
+
 
   const errorClass = ({ isActive }) =>
     `flex items-center gap-3 rounded-md px-4 py-2 transition-all duration-200 

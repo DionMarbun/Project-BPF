@@ -5,7 +5,7 @@ import sidebarBg from "../assets/img/sidebar-2.jpg";
 export default function Sidebar() {
   return (
     <aside
-      className="w-[230px] text-white min-h-screen flex flex-col justify-between bg-cover bg-center shadow-xl"
+      className="fixed top-0 left-0 z-40 w-[230px] h-screen text-white flex flex-col bg-cover bg-center shadow-xl"
       style={{
         backgroundImage: `url(${sidebarBg})`,
         backgroundColor: "rgba(0,0,0,0.6)",
@@ -15,33 +15,19 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="p-6 border-b border-white/20">
         <h1 className="text-2xl font-bold uppercase tracking-wide">
-          GrahaPena<b className="text-yellow-400">.</b>
+          GrahaPena<b className="text-yellow-400"></b>
         </h1>
-        <p className="text-sm opacity-70">Modern Admin Dashboard</p>
       </div>
 
-      {/* Menu */}
-      <div className="flex-1 px-4 py-6">
+      {/* Scrollable Menu Section */}
+      <div className="flex-1 px-4 py-6 overflow-y-auto">
         <ListMenu />
       </div>
 
-      {/* Footer */}
-      <div className="p-4 text-center text-sm border-t border-white/20 bg-black/40">
-        <div className="bg-white text-gray-800 p-3 rounded-lg shadow-md mb-4">
-          <div className="text-xs">Please organize your menus below</div>
-          <div className="mt-2 flex justify-center items-center gap-1 text-purple-700 text-sm font-semibold hover:text-purple-900 cursor-pointer">
-            <AiTwotonePlusCircle />
-            <span>Add Menus</span>
-          </div>
-        </div>
-        <img
-          className="w-14 h-14 mx-auto rounded-full border-2 border-white mb-2"
-          src="https://avatar.iran.liara.run/public/28"
-          alt="Avatar"
-        />
-        <div className="font-semibold">Admin Dashboard</div>
-        <div className="text-xs opacity-70 mt-1">&copy; 2025 All Rights Reserved</div>
-      </div>
+      {/* Optional: Footer / Bottom Section if needed */}
+      {/* <div className="p-4 border-t border-white/20 text-center text-sm opacity-70">
+        © 2025 GrahaPena
+      </div> */}
     </aside>
   );
 }

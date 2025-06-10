@@ -25,7 +25,7 @@ export default function Dashboard() {
     }, [refreshTrigger]);
 
     return (
-        <div id="dashboard-container" className="bg-gray-100 min-h-screen p-6">
+        <div id="dashboard-container" className="bg-gray-100 min-h-screen pt-0 px-5 pb-4">
             <PageHeader
                 title="Dashboard"
                 breadcrumb={['Dashboard', 'Order List']}
