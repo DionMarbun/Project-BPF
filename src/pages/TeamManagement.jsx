@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { teams } from "../Service/teams";
+import { teams } from "../Service/teams"; // Pastikan path-nya sesuai
 
 const TeamManagement = () => {
   const [search, setSearch] = useState("");
@@ -51,21 +51,21 @@ const TeamManagement = () => {
   );
 
   return (
-    <div className="bg-[#F5F8FF] p-6 pt-24 min-h-screen font-[Poppins]">
-      <div className="bg-white rounded-2xl shadow-md p-6">
+    <div className="bg-gray-50 p-6 pt-24 min-h-screen">
+      <div className="bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-[#1E3A8A]">Manajemen Tim</h2>
+          <h2 className="text-2xl font-semibold">Manajemen Tim</h2>
           <div className="flex gap-4">
             <input
               type="text"
               placeholder="Cari nama anggota..."
-              className="border border-blue-200 px-4 py-2 rounded-lg w-72 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="border px-4 py-2 rounded-md w-72"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
               onClick={() => setShowForm(!showForm)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
             >
               {showForm ? "Tutup Form" : "Tambah Tim"}
             </button>
@@ -81,7 +81,7 @@ const TeamManagement = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-3 bg-blue-50 rounded-xl border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200"
             />
             <input
               type="text"
@@ -90,7 +90,7 @@ const TeamManagement = () => {
               value={formData.position}
               onChange={handleChange}
               required
-              className="w-full p-3 bg-blue-50 rounded-xl border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200"
             />
             <input
               type="url"
@@ -99,11 +99,11 @@ const TeamManagement = () => {
               value={formData.photo}
               onChange={handleChange}
               required
-              className="w-full p-3 bg-blue-50 rounded-xl border border-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200"
             />
             <button
               type="submit"
-              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl"
             >
               Simpan Tim
             </button>
@@ -111,14 +111,14 @@ const TeamManagement = () => {
         )}
 
         {loading ? (
-          <p className="text-center text-blue-500">Memuat data...</p>
+          <p className="text-center text-gray-500">Memuat data...</p>
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-blue-800 bg-blue-50">
+                <tr className="text-gray-700">
                   <th className="text-left p-4">Foto</th>
                   <th className="text-left p-4">Nama</th>
                   <th className="text-left p-4">Posisi</th>
@@ -128,21 +128,19 @@ const TeamManagement = () => {
               </thead>
               <tbody>
                 {filtered.map((item) => (
-                  <tr key={item.id} className="border-t border-blue-100 hover:bg-blue-50">
+                  <tr key={item.id} className="border-t border-gray-200">
                     <td className="p-4">
                       <img
                         src={item.photo}
                         alt={item.name}
-                        className="w-12 h-12 object-cover rounded-full border-2 border-blue-300"
+                        className="w-12 h-12 object-cover rounded-full"
                       />
                     </td>
                     <td className="p-4">{item.name}</td>
                     <td className="p-4">{item.position}</td>
+                    <td className="p-4">{new Date(item.created_at).toLocaleDateString()}</td>
                     <td className="p-4">
-                      {new Date(item.created_at).toLocaleDateString()}
-                    </td>
-                    <td className="p-4">
-                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2 transition">
+                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2">
                         Edit
                       </button>
                       <button
@@ -156,7 +154,7 @@ const TeamManagement = () => {
                             }
                           }
                         }}
-                        className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200 transition"
+                        className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200"
                       >
                         Hapus
                       </button>
