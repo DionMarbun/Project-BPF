@@ -1,69 +1,180 @@
-import React, { useState } from "react";
-import teamData from "../JSON/team.json"; // Pastikan data JSON memuat field "image", "name", "role", "email", "phone"
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { teams } from "../Service/teams"; // Pastikan path-nya sesuai
 
-export default function TeamManagement() {
+const TeamManagement = () => {
   const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const filteredTeam = teamData.filter((member) =>
-    member.name.toLowerCase().includes(search.toLowerCase())
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    position: "",
+    photo: "",
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const result = await teams.fetchTeams();
+      setData(result);
+    } catch (err) {
+      setError("Gagal mengambil data tim.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await teams.createTeams(formData);
+      setFormData({ name: "", position: "", photo: "" });
+      setShowForm(false);
+      fetchData();
+    } catch (err) {
+      alert("Gagal menambahkan tim.");
+    }
+  };
+
+  const filtered = data.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="pt-24 p-6 max-w-7xl mx-auto font-[Poppins]">
-      {/* Header & Search */}
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6">
-        <h2 className="text-2xl font-bold text-gray-800 mb-4 sm:mb-0">Daftar Tim</h2>
-        <input
-          type="text"
-          placeholder="Cari nama anggota..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg w-full sm:w-80"
-        />
-      </div>
+    <div className="bg-gray-50 p-6 pt-24 min-h-screen">
+      <div className="bg-white rounded-xl shadow p-6">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-semibold">Manajemen Tim</h2>
+          <div className="flex gap-4">
+            <input
+              type="text"
+              placeholder="Cari nama anggota..."
+              className="border px-4 py-2 rounded-md w-72"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+            >
+              {showForm ? "Tutup Form" : "Tambah Tim"}
+            </button>
+          </div>
+        </div>
 
-      {/* Table Card */}
-      <div className="overflow-x-auto bg-white rounded-xl shadow">
-        <table className="min-w-full text-sm">
-          <thead className="bg-white text-gray-500">
-            <tr>
-              <th className="p-4 font-bold text-left">Foto</th>
-              <th className="p-4 font-bold text-left">Nama</th>
-              <th className="p-4 font-bold text-left">Peran</th>
-              <th className="p-4 font-bold text-left">Email</th>
-              <th className="p-4 font-bold text-left">Telepon</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredTeam.length > 0 ? (
-              filteredTeam.map((member) => (
-                <tr key={member.id} className="border-t border-gray-200 hover:bg-gray-50">
-                  <td className="p-4">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-10 h-10 rounded-full object-cover"
-                    />
-                  </td>
-                  <Link to={`/TeamManagement/${member.id}`} className="text-blue-600 hover:underline">
-                    {member.name}
-                  </Link>
-                  <td className="p-4">{member.role}</td>
-                  <td className="p-4">{member.email}</td>
-                  <td className="p-4">{member.phone}</td>
+        {showForm && (
+          <form onSubmit={handleSubmit} className="space-y-4 mb-6">
+            <input
+              type="text"
+              name="name"
+              placeholder="Nama Lengkap"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200"
+            />
+            <input
+              type="text"
+              name="position"
+              placeholder="Posisi"
+              value={formData.position}
+              onChange={handleChange}
+              required
+              className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200"
+            />
+            <input
+              type="url"
+              name="photo"
+              placeholder="URL Foto"
+              value={formData.photo}
+              onChange={handleChange}
+              required
+              className="w-full p-3 bg-gray-50 rounded-xl border border-gray-200"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl"
+            >
+              Simpan Tim
+            </button>
+          </form>
+        )}
+
+        {loading ? (
+          <p className="text-center text-gray-500">Memuat data...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="text-gray-700">
+                  <th className="text-left p-4">Foto</th>
+                  <th className="text-left p-4">Nama</th>
+                  <th className="text-left p-4">Posisi</th>
+                  <th className="text-left p-4">Tanggal Dibuat</th>
+                  <th className="text-left p-4">Aksi</th>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="5" className="p-6 text-center text-gray-500">
-                  Tidak ada anggota ditemukan.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {filtered.map((item) => (
+                  <tr key={item.id} className="border-t border-gray-200">
+                    <td className="p-4">
+                      <img
+                        src={item.photo}
+                        alt={item.name}
+                        className="w-12 h-12 object-cover rounded-full"
+                      />
+                    </td>
+                    <td className="p-4">{item.name}</td>
+                    <td className="p-4">{item.position}</td>
+                    <td className="p-4">{new Date(item.created_at).toLocaleDateString()}</td>
+                    <td className="p-4">
+                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2">
+                        Edit
+                      </button>
+                      <button
+                        onClick={async () => {
+                          if (confirm("Yakin ingin menghapus?")) {
+                            try {
+                              await teams.deleteTeams(item.id);
+                              setData(data.filter((d) => d.id !== item.id));
+                            } catch (err) {
+                              alert("Gagal menghapus data");
+                            }
+                          }
+                        }}
+                        className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200"
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {filtered.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="text-center p-4 text-gray-500">
+                      Tidak ada anggota ditemukan.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default TeamManagement;
