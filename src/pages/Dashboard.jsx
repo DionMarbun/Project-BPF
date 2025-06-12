@@ -25,27 +25,29 @@ export default function Dashboard() {
     return (
         <div className="bg-gray-50 min-h-screen p-6 text-gray-800 font-poppins">
             <div className="flex justify-between items-center mb-8">
-                <PageHeader title="Dashboard" breadcrumb={['Dashboard']} />
+                <PageHeader title="Dashboard" breadcrumb={["Dashboard"]} />
                 <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                     Create booking
                 </button>
             </div>
 
-            {/* Overview */}
-            <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mb-8">
-                {[
-                    { label: "Today's Check-in", value: 23 },
-                    { label: "Today's Check-out", value: 13 },
-                    { label: "In hotel", value: 60 },
-                    { label: "Available room", value: 10 },
-                    { label: "Occupied room", value: 90 },
-                    { label: "Total", value: 100 },
-                ].map((item, i) => (
-                    <div key={i} className="bg-white rounded-2xl p-5 text-center shadow-md">
-                        <p className="text-sm text-gray-500">{item.label}</p>
-                        <p className="text-2xl font-bold text-blue-600">{item.value}</p>
-                    </div>
-                ))}
+            {/* Overview - Updated style */}
+            <div className="bg-white p-6 rounded-2xl shadow mb-8">
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">Overview</h2>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-6 text-center">
+                    {[ 
+                        { label: "Check-in", value: 23, sub: "Today's" },
+                        { label: "Check-out", value: 13, sub: "Today's" },
+                        { label: "In hotel", value: 60, sub: "Total" },
+                        { label: "Available room", value: 10, sub: "Total" },
+                        { label: "Occupied room", value: 90, sub: "Total" },
+                    ].map((item, index) => (
+                        <div key={index}>
+                            <p className="text-sm text-gray-400">{item.sub}</p>
+                            <p className="text-md text-gray-700">{item.label} <span className="text-blue-600 font-bold text-xl">{item.value}</span></p>
+                        </div>
+                    ))}
+                </div>
             </div>
 
             {/* Rooms Section */}
