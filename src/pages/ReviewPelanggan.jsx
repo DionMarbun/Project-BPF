@@ -1,12 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import reviewData from "../JSON/dataReview.json"; // pastikan tidak ada spasi di nama file
+import { testimonis } from "../Service/testtimonis.js";
 
-const ReviewList = () => {
+const ReviewPelanggan = () => {
   const [search, setSearch] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [showForm, setShowForm] = useState(false);
+  const [newTestimoni, setNewTestimoni] = useState({
+    name: "",
+    comment: "",
+    rating: "",
+    created_at: ""
+  });
 
-  const filtered = reviewData.filter((item) =>
-    item.nama.toLowerCase().includes(search.toLowerCase())
+  const fetchData = async () => {
+    try {
+      const result = await testimonis.fetchTestimonis();
+      setData(result);
+    } catch (err) {
+      setError("Gagal mengambil data review.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await testimonis.createTestimonis(newTestimoni);
+      setNewTestimoni({ name: "", comment: "", rating: "", created_at: "" });
+      setShowForm(false);
+      fetchData();
+    } catch (err) {
+      alert("Gagal menambahkan testimoni.");
+    }
+  };
+
+  const filtered = data.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -14,63 +51,116 @@ const ReviewList = () => {
       <div className="bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Review Pelanggan</h2>
-          <input
-            type="text"
-            placeholder="Cari nama pelanggan..."
-            className="border px-4 py-2 rounded-md w-72"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div className="flex gap-4">
+            <input
+              type="text"
+              placeholder="Cari nama pelanggan..."
+              className="border px-4 py-2 rounded-md w-72"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-md"
+            >
+              Tambah Testimonis
+            </button>
+          </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full text-sm px-6">
-            <thead>
-              <tr className="text-gray-700">
-                <th className="text-left p-4">Nama</th>
-                <th className="text-left p-4">Komentar</th>
-                <th className="text-left p-4">Rating</th>
-                <th className="text-left p-4">Tanggal</th>
-                <th className="text-left p-4">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map((item, idx) => (
-                <tr key={idx} className="border-t border-gray-200">
-                  <td className="p-4">
-                    <Link
-                      to={`/ReviewPelanggan/${item.id}`}
-                      className="text-emerald-500 hover:text-emerald-600 underline"
-                    >
-                      {item.nama}
-                    </Link>
-                  </td>
-                  <td className="p-4">{item.komentar}</td>
-                  <td className="p-4">{item.rating} ⭐</td>
-                  <td className="p-4">{item.tanggal}</td>
-                  <td className="p-4">
-                    <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-3">
-                      Edit
-                    </button>
-                    <button className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200 mr-3">
-                      Hapus
-                    </button>
-                  </td>
+        {showForm && (
+          <form onSubmit={handleSubmit} className="mb-6 space-y-4">
+            <input
+              type="text"
+              placeholder="Nama"
+              className="border px-4 py-2 rounded-md w-full"
+              value={newTestimoni.name}
+              onChange={(e) => setNewTestimoni({ ...newTestimoni, name: e.target.value })}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Komentar"
+              className="border px-4 py-2 rounded-md w-full"
+              value={newTestimoni.comment}
+              onChange={(e) => setNewTestimoni({ ...newTestimoni, comment: e.target.value })}
+              required
+            />
+            <input
+              type="number"
+              placeholder="Rating (1-5)"
+              className="border px-4 py-2 rounded-md w-full"
+              value={newTestimoni.rating}
+              onChange={(e) => setNewTestimoni({ ...newTestimoni, rating: e.target.value })}
+              required
+            />
+            <input
+              type="date"
+              className="border px-4 py-2 rounded-md w-full"
+              value={newTestimoni.created_at}
+              onChange={(e) => setNewTestimoni({ ...newTestimoni, created_at: e.target.value })}
+              required
+            />
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+              Simpan
+            </button>
+          </form>
+        )}
+
+        {loading ? (
+          <p className="text-center text-gray-500">Memuat data...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm px-6">
+              <thead>
+                <tr className="text-gray-700">
+                  <th className="text-left p-4">Nama</th>
+                  <th className="text-left p-4">Komentar</th>
+                  <th className="text-left p-4">Rating</th>
+                  <th className="text-left p-4">Tanggal</th>
+                  <th className="text-left p-4">Aksi</th>
                 </tr>
-              ))}
-              {filtered.length === 0 && (
-                <tr>
-                  <td colSpan="5" className="text-center p-4 text-gray-500">
-                    Tidak ada review ditemukan.
-                  </td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {filtered.map((item, idx) => (
+                  <tr key={idx} className="border-t border-gray-200">
+                    <td className="p-4">
+                      <Link
+                        to={`/ReviewPelanggan/${item.id}`}
+                        className="text-emerald-500 hover:text-emerald-600 underline"
+                      >
+                        {item.name}
+                      </Link>
+                    </td>
+                    <td className="p-4">{item.comment}</td>
+                    <td className="p-4">{item.rating} ⭐</td>
+                    <td className="p-4">{item.created_at}</td>
+                    <td className="p-4">
+                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-3">
+                        Edit
+                      </button>
+                      <button className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200 mr-3">
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {filtered.length === 0 && (
+                  <tr>
+                    <td colSpan="5" className="text-center p-4 text-gray-500">
+                      Tidak ada review ditemukan.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
-export default ReviewList;
+export default ReviewPelanggan;

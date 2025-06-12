@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { mediaGalleryAPI } from "../Service/mediaGallery.js";
+import { mediaGalleryAPI } from "../Service/mediaGalleryAPI.js";
 import GenericTable from "../components/GenericTable";
 import AlertBox from "../components/AlertBox";
 import EmptyState from "../components/EmptyState.jsx";
@@ -9,9 +9,8 @@ import { AiFillDelete } from "react-icons/ai";
 export default function MediaGallery() {
   const [dataForm, setDataForm] = useState({
     title: "",
-    description: "",
-    media_type: "image", // default value
-    media_link: "", // URL string input dari user, nanti kita simpan di objek JSON
+    media_type: "image", // default
+    media_link: "",       // URL string
   });
 
   const [media, setMedia] = useState([]);
@@ -24,13 +23,11 @@ export default function MediaGallery() {
     setDataForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Submit tambah media baru
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setSuccess("");
 
-    // Validasi sederhana
     if (!dataForm.title || !dataForm.media_type || !dataForm.media_link) {
       setError("Judul, tipe media, dan link media wajib diisi.");
       return;
@@ -38,23 +35,13 @@ export default function MediaGallery() {
 
     try {
       setLoading(true);
-
-      // media_link simpan sebagai objek JSON sesuai skema:
       const payload = {
         ...dataForm,
         media_link: { url: dataForm.media_link },
       };
-
       await mediaGalleryAPI.createMedia(payload);
-
       setSuccess("Media berhasil ditambahkan!");
-      setDataForm({
-        title: "",
-        description: "",
-        media_type: "image",
-        media_link: "",
-      });
-
+      setDataForm({ title: "", media_type: "image", media_link: "" });
       loadMedia();
       setTimeout(() => setSuccess(""), 3000);
     } catch (err) {
@@ -64,7 +51,6 @@ export default function MediaGallery() {
     }
   };
 
-  // Load semua media
   const loadMedia = async () => {
     try {
       setLoading(true);
@@ -78,14 +64,10 @@ export default function MediaGallery() {
     }
   };
 
-  // Hapus media berdasarkan ID
   const handleDelete = async (id) => {
     if (!confirm("Yakin ingin menghapus media ini?")) return;
-
     try {
       setLoading(true);
-      setError("");
-      setSuccess("");
       await mediaGalleryAPI.deleteMedia(id);
       setSuccess("Media berhasil dihapus.");
       loadMedia();
@@ -103,13 +85,8 @@ export default function MediaGallery() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <br/>
-      <br/>
-      <br/>
       <div className="bg-white rounded-2xl shadow-lg p-6">
-        <br/>
         <h2 className="text-2xl font-semibold mb-4">Tambah Media Gallery</h2>
-
         {error && <AlertBox type="error">{error}</AlertBox>}
         {success && <AlertBox type="success">{success}</AlertBox>}
 
@@ -124,16 +101,6 @@ export default function MediaGallery() {
             required
             className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200"
           />
-
-          <textarea
-            name="description"
-            placeholder="Deskripsi (opsional)"
-            value={dataForm.description}
-            onChange={handleChange}
-            disabled={loading}
-            rows={3}
-            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200 resize-none"
-          ></textarea>
 
           <select
             name="media_type"
@@ -185,29 +152,43 @@ export default function MediaGallery() {
 
         {!loading && media.length > 0 && (
           <GenericTable
-            columns={["#", "Judul", "Deskripsi", "Tipe", "Link", "Aksi"]}
+            columns={["#", "Judul", "Tipe", "Link", "Aksi"]}
             data={media}
             renderRow={(item, index) => (
               <>
                 <td className="px-6 py-4">{index + 1}.</td>
                 <td className="px-6 py-4">{item.title}</td>
-                <td className="px-6 py-4">{item.description || "-"}</td>
                 <td className="px-6 py-4">{item.media_type}</td>
                 <td className="px-6 py-4">
-                  <a
-                    href={item.media_link?.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-blue-600 hover:underline"
-                  >
-                    Lihat Media
-                  </a>
+                  {item.media_link?.url ? (
+                    item.media_type === "image" ? (
+                      <a
+                        href={item.media_link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <img
+                          src={item.media_link.url}
+                          alt={item.title}
+                          className="w-20 h-20 object-cover rounded-lg hover:opacity-80 transition"
+                        />
+                      </a>
+                    ) : (
+                      <a
+                        href={item.media_link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 hover:underline"
+                      >
+                        Lihat Media
+                      </a>
+                    )
+                  ) : (
+                    <span className="italic text-gray-400">Tidak ada link</span>
+                  )}
                 </td>
                 <td className="px-6 py-4">
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    disabled={loading}
-                  >
+                  <button onClick={() => handleDelete(item.id)} disabled={loading}>
                     <AiFillDelete className="text-red-400 text-2xl hover:text-red-600 transition-colors" />
                   </button>
                 </td>
