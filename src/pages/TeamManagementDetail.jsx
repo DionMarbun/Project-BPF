@@ -25,18 +25,24 @@ export default function TeamManagementDetail() {
   }
 
   return (
-    <div className="pt-24 p-6 max-w-2xl mx-auto bg-white rounded-xl shadow font-[Poppins]">
-      <div className="flex flex-col items-center">
-        <img
-          src={member.image}
-          alt={member.name}
-          className="w-32 h-32 rounded-full object-cover mb-4"
-        />
-        <h2 className="text-2xl font-bold mb-1">{member.name}</h2>
-        <p className="text-gray-500 mb-2">{member.role}</p>
-        <div className="w-full mt-4">
-          <p className="text-gray-600 mb-1"><strong>Email:</strong> {member.email}</p>
-          <p className="text-gray-600 mb-1"><strong>Telepon:</strong> {member.phone}</p>
+    <div className="pt-24 min-h-screen bg-[#F5F8FF] font-[Poppins]">
+      <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-md p-8">
+        <div className="flex flex-col items-center">
+          <img
+            src={member.image}
+            alt={member.name}
+            className="w-32 h-32 rounded-full object-cover mb-4 border-4 border-[#3B82F6]"
+          />
+          <h2 className="text-2xl font-bold text-[#1E3A8A] mb-1">{member.name}</h2>
+          <p className="text-gray-500 mb-4">{member.role}</p>
+          <div className="w-full space-y-2 text-sm text-gray-700">
+            <div>
+              <span className="font-semibold text-[#2563EB]">Email:</span> {member.email}
+            </div>
+            <div>
+              <span className="font-semibold text-[#2563EB]">Telepon:</span> {member.phone}
+            </div>
+          </div>
         </div>
       </div>
     </div>

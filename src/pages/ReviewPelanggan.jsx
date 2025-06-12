@@ -47,23 +47,23 @@ const ReviewPelanggan = () => {
   );
 
   return (
-    <div className="bg-gray-50 p-6 pt-24 min-h-screen">
+    <div className="bg-blue-50 p-6 pt-24 min-h-screen font-[Poppins]">
       <div className="bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Review Pelanggan</h2>
+          <h2 className="text-2xl font-semibold text-blue-700">Review Pelanggan</h2>
           <div className="flex gap-4">
             <input
               type="text"
               placeholder="Cari nama pelanggan..."
-              className="border px-4 py-2 rounded-md w-72"
+              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-72"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
               onClick={() => setShowForm(!showForm)}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-md"
+              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
             >
-              Tambah Testimonis
+              Tambah Testimoni
             </button>
           </div>
         </div>
@@ -73,7 +73,7 @@ const ReviewPelanggan = () => {
             <input
               type="text"
               placeholder="Nama"
-              className="border px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.name}
               onChange={(e) => setNewTestimoni({ ...newTestimoni, name: e.target.value })}
               required
@@ -81,7 +81,7 @@ const ReviewPelanggan = () => {
             <input
               type="text"
               placeholder="Komentar"
-              className="border px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.comment}
               onChange={(e) => setNewTestimoni({ ...newTestimoni, comment: e.target.value })}
               required
@@ -89,14 +89,14 @@ const ReviewPelanggan = () => {
             <input
               type="number"
               placeholder="Rating (1-5)"
-              className="border px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.rating}
               onChange={(e) => setNewTestimoni({ ...newTestimoni, rating: e.target.value })}
               required
             />
             <input
               type="date"
-              className="border px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.created_at}
               onChange={(e) => setNewTestimoni({ ...newTestimoni, created_at: e.target.value })}
               required
@@ -108,14 +108,14 @@ const ReviewPelanggan = () => {
         )}
 
         {loading ? (
-          <p className="text-center text-gray-500">Memuat data...</p>
+          <p className="text-center text-blue-500">Memuat data...</p>
         ) : error ? (
           <p className="text-center text-red-500">{error}</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full text-sm px-6">
+            <table className="min-w-full text-sm">
               <thead>
-                <tr className="text-gray-700">
+                <tr className="text-blue-700 bg-blue-100">
                   <th className="text-left p-4">Nama</th>
                   <th className="text-left p-4">Komentar</th>
                   <th className="text-left p-4">Rating</th>
@@ -125,11 +125,11 @@ const ReviewPelanggan = () => {
               </thead>
               <tbody>
                 {filtered.map((item, idx) => (
-                  <tr key={idx} className="border-t border-gray-200">
+                  <tr key={idx} className="border-t border-blue-100 hover:bg-blue-50">
                     <td className="p-4">
                       <Link
                         to={`/ReviewPelanggan/${item.id}`}
-                        className="text-emerald-500 hover:text-emerald-600 underline"
+                        className="text-blue-500 hover:text-blue-600 underline"
                       >
                         {item.name}
                       </Link>
@@ -141,7 +141,7 @@ const ReviewPelanggan = () => {
                       <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-3">
                         Edit
                       </button>
-                      <button className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200 mr-3">
+                      <button className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200">
                         Hapus
                       </button>
                     </td>
@@ -149,7 +149,7 @@ const ReviewPelanggan = () => {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan="5" className="text-center p-4 text-gray-500">
+                    <td colSpan="5" className="text-center p-4 text-blue-500">
                       Tidak ada review ditemukan.
                     </td>
                   </tr>

@@ -1,106 +1,126 @@
-import { MdPermMedia } from "react-icons/md"; 
-import { RiProfileLine } from "react-icons/ri"; 
-import { AiOutlineContacts } from "react-icons/ai"; 
-import { FcContacts } from "react-icons/fc"; 
-import { RiAdminFill } from "react-icons/ri"; 
-import { MdWork } from "react-icons/md";
-import { CgWorkAlt } from "react-icons/cg";
-import { MdArticle } from "react-icons/md";
-import { FaQuestionCircle } from "react-icons/fa";
-import { MdRateReview } from "react-icons/md";
-import { RiServiceFill } from "react-icons/ri";
-import { BsPersonWorkspace } from "react-icons/bs";
-import { AiOutlineTeam, AiOutlineUserAdd, AiOutlineShoppingCart } from "react-icons/ai";
-import { BiErrorCircle } from "react-icons/bi";
-import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import {
+  MdPermMedia,
+  MdWork,
+  MdArticle,
+  MdRateReview,
+  MdOutlineDashboardCustomize,
+} from "react-icons/md";
+import {
+  RiProfileLine,
+  RiServiceFill,
+  RiAdminFill,
+} from "react-icons/ri";
+import {
+  AiOutlineContacts,
+  AiOutlineTeam,
+} from "react-icons/ai";
+import { FaQuestionCircle } from "react-icons/fa";
+import { BsPersonWorkspace } from "react-icons/bs";
+import { BiErrorCircle } from "react-icons/bi";
 
 export default function ListMenu() {
-const menuClass = ({ isActive }) =>
-  `flex items-center gap-3 rounded-md px-4 py-2 transition-all duration-200 
-  ${isActive ? "text-white font-semibold bg-cyan-500" : "text-gray-300 hover:bg-cyan-500 hover:text-white"}`;
-
+  const menuClass = ({ isActive }) =>
+    `flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium transition-all 
+    ${isActive ? "bg-blue-100 text-blue-600" : "text-gray-700 hover:bg-gray-100 hover:text-blue-600"}`;
 
   const errorClass = ({ isActive }) =>
-    `flex items-center gap-3 rounded-md px-4 py-2 transition-all duration-200 
-    ${isActive ? "text-red-400 font-semibold bg-red-200/10" : "text-gray-400 hover:text-red-400 hover:bg-red-100/10"}`;
+    `flex items-center gap-3 rounded-lg px-4 py-2 text-sm font-medium transition-all 
+    ${isActive ? "bg-red-100 text-red-600" : "text-gray-500 hover:bg-red-50 hover:text-red-500"}`;
 
   return (
-    <div id="sidebar-menu" className="mt-6 text-sm">
-      <ul id="menu-list" className="space-y-2">
+    <div id="sidebar-menu" className="mt-4 text-sm font-sans">
+      <ul className="space-y-1">
         <li>
           <NavLink to="/" className={menuClass}>
-            <MdOutlineDashboardCustomize /> Dashboard
+            <MdOutlineDashboardCustomize className="text-lg" />
+            Dashboard
           </NavLink>
         </li>
         <li>
           <NavLink to="/Reservasi" className={menuClass}>
-            <RiServiceFill /> Reservasi
+            <RiServiceFill className="text-lg" />
+            Reservasi
           </NavLink>
         </li>
         <li>
           <NavLink to="/RoomsList" className={menuClass}>
-            <BsPersonWorkspace /> RoomsList
+            <BsPersonWorkspace className="text-lg" />
+            Rooms List
           </NavLink>
         </li>
         <li>
           <NavLink to="/TeamManagement" className={menuClass}>
-            <AiOutlineTeam /> Team Management
+            <AiOutlineTeam className="text-lg" />
+            Team Management
           </NavLink>
         </li>
         <li>
           <NavLink to="/Review" className={menuClass}>
-            <MdRateReview /> Review Pelanggan
+            <MdRateReview className="text-lg" />
+            Review Pelanggan
           </NavLink>
         </li>
         <li>
           <NavLink to="/LowonganList" className={menuClass}>
-            <MdWork /> Lowongan
+            <MdWork className="text-lg" />
+            Lowongan
           </NavLink>
         </li>
         <li>
           <NavLink to="/FAQList" className={menuClass}>
-            <FaQuestionCircle /> FAQ
+            <FaQuestionCircle className="text-lg" />
+            FAQ
           </NavLink>
         </li>
         <li>
           <NavLink to="/ArtikelCrud" className={menuClass}>
-            <MdArticle /> Article
+            <MdArticle className="text-lg" />
+            Artikel
           </NavLink>
         </li>
         <li>
           <NavLink to="/KontakMasuk" className={menuClass}>
-            <AiOutlineContacts /> Kontak Masuk
+            <AiOutlineContacts className="text-lg" />
+            Kontak Masuk
           </NavLink>
         </li>
         <li>
           <NavLink to="/Role" className={menuClass}>
-            <RiAdminFill />Role Management
+            <RiAdminFill className="text-lg" />
+            Role Management
           </NavLink>
         </li>
         <li>
           <NavLink to="/CompanyProfile" className={menuClass}>
-            <RiProfileLine />Company Profile
+            <RiProfileLine className="text-lg" />
+            Company Profile
           </NavLink>
         </li>
         <li>
           <NavLink to="/MediaGallery" className={menuClass}>
-            <MdPermMedia />Media Gallery
+            <MdPermMedia className="text-lg" />
+            Media Gallery
           </NavLink>
         </li>
+
+        {/* Error Pages */}
         <li>
           <NavLink to="/Error400" className={errorClass}>
-            <BiErrorCircle /> Error 400
+            <BiErrorCircle className="text-lg" />
+            Error 400
           </NavLink>
         </li>
         <li>
           <NavLink to="/Error401" className={errorClass}>
-            <BiErrorCircle /> Error 401
+            <BiErrorCircle className="text-lg" />
+            Error 401
           </NavLink>
         </li>
         <li>
           <NavLink to="/Error403" className={errorClass}>
-            <BiErrorCircle /> Error Saja
+            <BiErrorCircle className="text-lg" />
+            Error 403
           </NavLink>
         </li>
       </ul>

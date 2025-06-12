@@ -9,8 +9,8 @@ import { AiFillDelete } from "react-icons/ai";
 export default function MediaGallery() {
   const [dataForm, setDataForm] = useState({
     title: "",
-    media_type: "image", // default
-    media_link: "",       // URL string
+    media_type: "image",
+    media_link: "",
   });
 
   const [media, setMedia] = useState([]);
@@ -85,8 +85,10 @@ export default function MediaGallery() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 space-y-6">
-      <div className="bg-white rounded-2xl shadow-lg p-6">
-        <h2 className="text-2xl font-semibold mb-4">Tambah Media Gallery</h2>
+      <div className="bg-white rounded-2xl shadow-lg p-6 border border-blue-100">
+        <h2 className="text-2xl font-semibold mb-4 text-blue-700">
+          Tambah Media Gallery
+        </h2>
         {error && <AlertBox type="error">{error}</AlertBox>}
         {success && <AlertBox type="success">{success}</AlertBox>}
 
@@ -99,7 +101,7 @@ export default function MediaGallery() {
             onChange={handleChange}
             disabled={loading}
             required
-            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200"
+            className="w-full p-3 bg-blue-50 rounded-2xl border border-blue-200 focus:ring-2 focus:ring-blue-300"
           />
 
           <select
@@ -108,7 +110,7 @@ export default function MediaGallery() {
             onChange={handleChange}
             disabled={loading}
             required
-            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200"
+            className="w-full p-3 bg-blue-50 rounded-2xl border border-blue-200 focus:ring-2 focus:ring-blue-300"
           >
             <option value="image">Image</option>
             <option value="video">Video</option>
@@ -122,22 +124,22 @@ export default function MediaGallery() {
             onChange={handleChange}
             disabled={loading}
             required
-            className="w-full p-3 bg-gray-50 rounded-2xl border border-gray-200"
+            className="w-full p-3 bg-blue-50 rounded-2xl border border-blue-200 focus:ring-2 focus:ring-blue-300"
           />
 
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-2xl disabled:opacity-50"
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-2xl disabled:opacity-50"
           >
             {loading ? "Mohon Tunggu..." : "Tambah Media"}
           </button>
         </form>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden mt-10">
-        <div className="px-6 py-4">
-          <h3 className="text-lg font-semibold">
+      <div className="bg-white rounded-2xl shadow-lg overflow-hidden mt-10 border border-blue-100">
+        <div className="px-6 py-4 border-b border-blue-100">
+          <h3 className="text-lg font-semibold text-blue-700">
             Daftar Media Gallery ({media.length})
           </h3>
         </div>
@@ -156,9 +158,9 @@ export default function MediaGallery() {
             data={media}
             renderRow={(item, index) => (
               <>
-                <td className="px-6 py-4">{index + 1}.</td>
-                <td className="px-6 py-4">{item.title}</td>
-                <td className="px-6 py-4">{item.media_type}</td>
+                <td className="px-6 py-4 text-blue-900">{index + 1}.</td>
+                <td className="px-6 py-4 text-blue-900">{item.title}</td>
+                <td className="px-6 py-4 text-blue-800">{item.media_type}</td>
                 <td className="px-6 py-4">
                   {item.media_link?.url ? (
                     item.media_type === "image" ? (
@@ -170,7 +172,7 @@ export default function MediaGallery() {
                         <img
                           src={item.media_link.url}
                           alt={item.title}
-                          className="w-20 h-20 object-cover rounded-lg hover:opacity-80 transition"
+                          className="w-20 h-20 object-cover rounded-lg hover:ring-2 hover:ring-blue-300 transition"
                         />
                       </a>
                     ) : (

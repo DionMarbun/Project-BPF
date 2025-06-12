@@ -8,7 +8,6 @@ const FAQList = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  // Untuk form tambah FAQ
   const [form, setForm] = useState({ tanya: "", jawab: "" });
   const [showForm, setShowForm] = useState(false);
 
@@ -37,7 +36,7 @@ const FAQList = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await FaqAPI.createFaq(form); // asumsi endpoint `createFaq` tersedia
+      await FaqAPI.createFaq(form);
       setSuccess("FAQ berhasil ditambahkan.");
       setForm({ tanya: "", jawab: "" });
       setShowForm(false);
@@ -55,14 +54,16 @@ const FAQList = () => {
   );
 
   return (
-    <div className="bg-gray-50 p-6 pt-24 min-h-screen">
-      <div className="bg-white rounded-xl shadow p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold">Daftar FAQ - Pertanyaan Umum</h2>
+    <div className="bg-white p-6 pt-24 min-h-screen font-[Poppins]">
+      <div className="bg-white rounded-xl shadow p-6 border border-blue-100">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+          <h2 className="text-2xl font-semibold text-blue-700">
+            Daftar FAQ - Pertanyaan Umum
+          </h2>
           <input
             type="text"
             placeholder="Cari pertanyaan..."
-            className="border px-4 py-2 rounded-md w-72"
+            className="border border-blue-300 px-4 py-2 rounded-md w-full sm:w-72 focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -70,7 +71,7 @@ const FAQList = () => {
 
         <div className="mb-6">
           <button
-            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
             onClick={() => setShowForm(!showForm)}
           >
             {showForm ? "Tutup Form" : "Tambah FAQ"}
@@ -86,7 +87,7 @@ const FAQList = () => {
               value={form.tanya}
               onChange={handleChange}
               required
-              className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+              className="w-full p-3 bg-blue-50 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             <textarea
               name="jawab"
@@ -94,12 +95,12 @@ const FAQList = () => {
               value={form.jawab}
               onChange={handleChange}
               required
-              className="w-full p-3 bg-gray-50 rounded-lg border border-gray-300"
+              className="w-full p-3 bg-blue-50 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             />
             <button
               type="submit"
               disabled={loading}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
             >
               {loading ? "Menyimpan..." : "Simpan FAQ"}
             </button>
@@ -114,20 +115,23 @@ const FAQList = () => {
         ) : (
           <div className="overflow-x-auto">
             <table className="min-w-full text-sm">
-              <thead>
-                <tr className="text-gray-700">
-                  <th className="text-left p-4">Pertanyaan</th>
-                  <th className="text-left p-4">Jawaban</th>
-                  <th className="text-left p-4">Aksi</th>
+              <thead className="bg-white text-blue-600 border-b border-blue-100">
+                <tr>
+                  <th className="text-left p-4 font-semibold">Pertanyaan</th>
+                  <th className="text-left p-4 font-semibold">Jawaban</th>
+                  <th className="text-left p-4 font-semibold">Aksi</th>
                 </tr>
               </thead>
               <tbody>
                 {filtered.map((item, idx) => (
-                  <tr key={idx} className="border-t border-gray-200">
-                    <td className="p-4">{item.tanya}</td>
-                    <td className="p-4">{item.jawab}</td>
+                  <tr
+                    key={idx}
+                    className="border-t border-blue-100 hover:bg-blue-50 transition"
+                  >
+                    <td className="p-4 text-blue-800">{item.tanya}</td>
+                    <td className="p-4 text-gray-700">{item.jawab}</td>
                     <td className="p-4">
-                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2">
+                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2 transition">
                         Edit
                       </button>
                       <button
@@ -141,7 +145,7 @@ const FAQList = () => {
                             }
                           }
                         }}
-                        className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200"
+                        className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200 transition"
                       >
                         Hapus
                       </button>
