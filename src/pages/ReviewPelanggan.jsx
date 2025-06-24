@@ -35,11 +35,29 @@ const ReviewPelanggan = () => {
     e.preventDefault();
     try {
       await testimonis.createTestimonis(newTestimoni);
-      setNewTestimoni({ name: "",role:"", comment: "", rating: "", created_at: "" });
+      setNewTestimoni({
+        name: "",
+        role: "",
+        comment: "",
+        rating: "",
+        created_at: "",
+      });
       setShowForm(false);
       fetchData();
     } catch (err) {
       alert("Gagal menambahkan testimoni.");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const konfirmasi = confirm("Yakin ingin menghapus testimoni ini?");
+    if (!konfirmasi) return;
+
+    try {
+      await testimonis.deleteTestimonis(id);
+      fetchData(); // refresh data
+    } catch (err) {
+      alert("Gagal menghapus testimoni.");
     }
   };
 
@@ -76,7 +94,7 @@ const ReviewPelanggan = () => {
             <input
               type="text"
               placeholder="Nama"
-              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 px-4 py-2 rounded-md w-full"
               value={newTestimoni.name}
               onChange={(e) =>
                 setNewTestimoni({ ...newTestimoni, name: e.target.value })
@@ -85,8 +103,8 @@ const ReviewPelanggan = () => {
             />
             <input
               type="text"
-              placeholder="Role (misal: Penyewa, Mahasiswa)"
-              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
+              placeholder="Role (Penyewa, Mahasiswa, dll)"
+              className="border border-blue-300 px-4 py-2 rounded-md w-full"
               value={newTestimoni.role}
               onChange={(e) =>
                 setNewTestimoni({ ...newTestimoni, role: e.target.value })
@@ -96,7 +114,7 @@ const ReviewPelanggan = () => {
             <input
               type="text"
               placeholder="Komentar"
-              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 px-4 py-2 rounded-md w-full"
               value={newTestimoni.comment}
               onChange={(e) =>
                 setNewTestimoni({ ...newTestimoni, comment: e.target.value })
@@ -106,7 +124,7 @@ const ReviewPelanggan = () => {
             <input
               type="number"
               placeholder="Rating (1-5)"
-              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 px-4 py-2 rounded-md w-full"
               value={newTestimoni.rating}
               onChange={(e) =>
                 setNewTestimoni({ ...newTestimoni, rating: e.target.value })
@@ -115,10 +133,13 @@ const ReviewPelanggan = () => {
             />
             <input
               type="date"
-              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
+              className="border border-blue-300 px-4 py-2 rounded-md w-full"
               value={newTestimoni.created_at}
               onChange={(e) =>
-                setNewTestimoni({ ...newTestimoni, created_at: e.target.value })
+                setNewTestimoni({
+                  ...newTestimoni,
+                  created_at: e.target.value,
+                })
               }
               required
             />
@@ -141,6 +162,7 @@ const ReviewPelanggan = () => {
               <thead>
                 <tr className="text-blue-700 bg-blue-100">
                   <th className="text-left p-4">Nama</th>
+                  <th className="text-left p-4">Role</th>
                   <th className="text-left p-4">Komentar</th>
                   <th className="text-left p-4">Rating</th>
                   <th className="text-left p-4">Tanggal</th>
@@ -153,14 +175,8 @@ const ReviewPelanggan = () => {
                     key={idx}
                     className="border-t border-blue-100 hover:bg-blue-50"
                   >
-                    <td className="p-4">
-                      <Link
-                        to={`/ReviewPelanggan/${item.id}`}
-                        className="text-blue-500 hover:text-blue-600 underline"
-                      >
-                        {item.name}
-                      </Link>
-                    </td>
+                    <td className="p-4">{item.name}</td>
+                    <td className="p-4">{item.role}</td>
                     <td className="p-4">{item.comment}</td>
                     <td className="p-4">{item.rating} ⭐</td>
                     <td className="p-4">{item.created_at}</td>
@@ -168,7 +184,10 @@ const ReviewPelanggan = () => {
                       <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-3">
                         Edit
                       </button>
-                      <button className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200">
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200"
+                      >
                         Hapus
                       </button>
                     </td>
@@ -176,7 +195,7 @@ const ReviewPelanggan = () => {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan="5" className="text-center p-4 text-blue-500">
+                    <td colSpan="6" className="text-center p-4 text-blue-500">
                       Tidak ada review ditemukan.
                     </td>
                   </tr>
