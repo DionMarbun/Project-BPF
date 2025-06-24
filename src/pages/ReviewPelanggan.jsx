@@ -10,9 +10,10 @@ const ReviewPelanggan = () => {
   const [showForm, setShowForm] = useState(false);
   const [newTestimoni, setNewTestimoni] = useState({
     name: "",
+    role: "",
     comment: "",
     rating: "",
-    created_at: ""
+    created_at: "",
   });
 
   const fetchData = async () => {
@@ -34,7 +35,7 @@ const ReviewPelanggan = () => {
     e.preventDefault();
     try {
       await testimonis.createTestimonis(newTestimoni);
-      setNewTestimoni({ name: "", comment: "", rating: "", created_at: "" });
+      setNewTestimoni({ name: "",role:"", comment: "", rating: "", created_at: "" });
       setShowForm(false);
       fetchData();
     } catch (err) {
@@ -50,7 +51,9 @@ const ReviewPelanggan = () => {
     <div className="bg-blue-50 p-6 pt-24 min-h-screen font-[Poppins]">
       <div className="bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-blue-700">Review Pelanggan</h2>
+          <h2 className="text-2xl font-semibold text-blue-700">
+            Review Pelanggan
+          </h2>
           <div className="flex gap-4">
             <input
               type="text"
@@ -75,7 +78,19 @@ const ReviewPelanggan = () => {
               placeholder="Nama"
               className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.name}
-              onChange={(e) => setNewTestimoni({ ...newTestimoni, name: e.target.value })}
+              onChange={(e) =>
+                setNewTestimoni({ ...newTestimoni, name: e.target.value })
+              }
+              required
+            />
+            <input
+              type="text"
+              placeholder="Role (misal: Penyewa, Mahasiswa)"
+              className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
+              value={newTestimoni.role}
+              onChange={(e) =>
+                setNewTestimoni({ ...newTestimoni, role: e.target.value })
+              }
               required
             />
             <input
@@ -83,7 +98,9 @@ const ReviewPelanggan = () => {
               placeholder="Komentar"
               className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.comment}
-              onChange={(e) => setNewTestimoni({ ...newTestimoni, comment: e.target.value })}
+              onChange={(e) =>
+                setNewTestimoni({ ...newTestimoni, comment: e.target.value })
+              }
               required
             />
             <input
@@ -91,17 +108,24 @@ const ReviewPelanggan = () => {
               placeholder="Rating (1-5)"
               className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.rating}
-              onChange={(e) => setNewTestimoni({ ...newTestimoni, rating: e.target.value })}
+              onChange={(e) =>
+                setNewTestimoni({ ...newTestimoni, rating: e.target.value })
+              }
               required
             />
             <input
               type="date"
               className="border border-blue-300 focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full"
               value={newTestimoni.created_at}
-              onChange={(e) => setNewTestimoni({ ...newTestimoni, created_at: e.target.value })}
+              onChange={(e) =>
+                setNewTestimoni({ ...newTestimoni, created_at: e.target.value })
+              }
               required
             />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
               Simpan
             </button>
           </form>
@@ -125,7 +149,10 @@ const ReviewPelanggan = () => {
               </thead>
               <tbody>
                 {filtered.map((item, idx) => (
-                  <tr key={idx} className="border-t border-blue-100 hover:bg-blue-50">
+                  <tr
+                    key={idx}
+                    className="border-t border-blue-100 hover:bg-blue-50"
+                  >
                     <td className="p-4">
                       <Link
                         to={`/ReviewPelanggan/${item.id}`}
