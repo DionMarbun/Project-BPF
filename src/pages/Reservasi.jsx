@@ -10,7 +10,7 @@ export default function ReservasiAdmin() {
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     nama: "",
-    email: "",
+    nohp: "",
     tanggal: "",
     waktu_mulai: "",
     waktu_selesai: "",
@@ -49,7 +49,7 @@ export default function ReservasiAdmin() {
       let durasi = (end - start) / (1000 * 60 * 60); // hasil jam
 
       if (durasi > 0) {
-        const hargaPerOrangPerJam = 30000; // bisa kamu sesuaikan
+        const hargaPerOrangPerJam = 30000;
         const total = durasi * parseInt(jumlah_orang) * hargaPerOrangPerJam;
         setFormData((prev) => ({ ...prev, total_harga: total }));
       } else {
@@ -76,7 +76,7 @@ export default function ReservasiAdmin() {
       }
       setFormData({
         nama: "",
-        email: "",
+        nohp: "",
         tanggal: "",
         waktu_mulai: "",
         waktu_selesai: "",
@@ -96,7 +96,7 @@ export default function ReservasiAdmin() {
   const handleEdit = (item) => {
     setFormData({
       nama: item.nama,
-      email: item.email,
+      nohp: item.nohp,
       tanggal: item.tanggal,
       waktu_mulai: item.waktu_mulai,
       waktu_selesai: item.waktu_selesai,
@@ -152,13 +152,13 @@ export default function ReservasiAdmin() {
             </div>
 
             <div>
-              <label className="block font-semibold mb-1">Email</label>
+              <label className="block font-semibold mb-1">Nomor HP</label>
               <input
-                type="email"
-                name="email"
-                value={formData.email}
+                type="tel"
+                name="nohp"
+                value={formData.nohp}
                 onChange={handleChange}
-                placeholder="Contoh: emailanda@gmail.com"
+                placeholder="081234567890"
                 required
                 className="w-full border rounded-lg p-3"
               />
@@ -248,13 +248,13 @@ export default function ReservasiAdmin() {
 
         {message && <AlertBox type="info">{message}</AlertBox>}
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto mt-6">
           <table className="min-w-full text-sm">
             <thead className="bg-white text-left border-b border-gray-200">
               <tr>
                 <th className="p-4">#</th>
                 <th className="p-4">Nama</th>
-                <th className="p-4">Email</th>
+                <th className="p-4">No HP</th>
                 <th className="p-4">Tanggal</th>
                 <th className="p-4">Mulai</th>
                 <th className="p-4">Selesai</th>
@@ -278,7 +278,7 @@ export default function ReservasiAdmin() {
                   >
                     <td className="p-4">{index + 1}</td>
                     <td className="p-4">{item.nama}</td>
-                    <td className="p-4">{item.email}</td>
+                    <td className="p-4">{item.nohp}</td>
                     <td className="p-4">{item.tanggal}</td>
                     <td className="p-4">{item.waktu_mulai}</td>
                     <td className="p-4">{item.waktu_selesai}</td>
