@@ -103,26 +103,6 @@ export default function ListMenu() {
             Media Gallery
           </NavLink>
         </li>
-
-        {/* Error Pages */}
-        <li>
-          <NavLink to="/Error400" className={errorClass}>
-            <BiErrorCircle className="text-lg" />
-            Error 400
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/Error401" className={errorClass}>
-            <BiErrorCircle className="text-lg" />
-            Error 401
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/Error403" className={errorClass}>
-            <BiErrorCircle className="text-lg" />
-            Error 403
-          </NavLink>
-        </li>
       </ul>
     </div>
   );
