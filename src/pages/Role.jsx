@@ -4,7 +4,7 @@ import GenericTable from "../components/GenericTable"
 import AlertBox from "../components/AlertBox"
 import EmptyState from "../components/EmptyState"
 import LoadingSpinner from "../components/LoadingSpinner"
-import { AiFillDelete } from "react-icons/ai"
+import { AiFillDelete, AiFillEdit } from "react-icons/ai"
 
 export default function Role() {
   const [formData, setFormData] = useState({
@@ -15,6 +15,7 @@ export default function Role() {
   })
 
   const [users, setUsers] = useState([])
+  const [editingId, setEditingId] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const [success, setSuccess] = useState("")
@@ -31,10 +32,16 @@ export default function Role() {
       setError("")
       setSuccess("")
 
-      await userAPI.createUser(formData)
+      if (editingId) {
+        await userAPI.updateUser(editingId, formData)
+        setSuccess("User berhasil diperbarui.")
+      } else {
+        await userAPI.createUser(formData)
+        setSuccess("User berhasil ditambahkan!")
+      }
 
-      setSuccess("User berhasil ditambahkan!")
       setFormData({ nama: "", email: "", telepon: "", role: "" })
+      setEditingId(null)
       setTimeout(() => setSuccess(""), 3000)
       loadUsers()
     } catch (err) {
@@ -58,9 +65,7 @@ export default function Role() {
   }
 
   const handleDelete = async (id) => {
-    const konfirmasi = confirm("Yakin ingin menghapus user ini?")
-    if (!konfirmasi) return
-
+    if (!confirm("Yakin ingin menghapus user ini?")) return
     try {
       setLoading(true)
       setSuccess("")
@@ -74,15 +79,32 @@ export default function Role() {
     }
   }
 
+  const handleEdit = (item) => {
+    setFormData({
+      nama: item.nama,
+      email: item.email,
+      telepon: item.telepon,
+      role: item.role,
+    })
+    setEditingId(item.id)
+    window.scrollTo({ top: 0, behavior: "smooth" }) // auto scroll ke form saat edit
+  }
+
+  const handleCancel = () => {
+    setFormData({ nama: "", email: "", telepon: "", role: "" })
+    setEditingId(null)
+  }
+
   useEffect(() => {
     loadUsers()
   }, [])
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8">
-
-      <div className="bg-blue-50 border border-blue-100 rounded-2xl shadow p-6">
-        <h2 className="text-2xl font-bold text-blue-800 mb-4">Form Tambah User</h2>
+      <div className="bg-white border border-blue-100 rounded-2xl shadow p-6">
+        <h2 className="text-2xl font-bold text-blue-800 mb-4">
+          {editingId ? "Edit User" : "Form Tambah User"}
+        </h2>
 
         {error && <AlertBox type="error">{error}</AlertBox>}
         {success && <AlertBox type="success">{success}</AlertBox>}
@@ -128,13 +150,30 @@ export default function Role() {
             required
             className="w-full p-3 bg-white rounded-xl border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
           />
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-6 py-3 bg-blue-400 hover:bg-blue-600 text-white font-semibold rounded-xl transition disabled:opacity-50"
-          >
-            {loading ? "Menyimpan..." : "Simpan User"}
-          </button>
+
+          <div className="flex gap-4">
+            {editingId && (
+              <button
+                type="button"
+                onClick={handleCancel}
+                disabled={loading}
+                className="px-6 py-3 bg-gray-300 hover:bg-gray-400 text-black font-semibold rounded-xl transition"
+              >
+                Batal
+              </button>
+            )}
+            <button
+              type="submit"
+              disabled={loading}
+              className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition disabled:opacity-50"
+            >
+              {loading
+                ? "Menyimpan..."
+                : editingId
+                ? "Update User"
+                : "Simpan User"}
+            </button>
+          </div>
         </form>
       </div>
 
@@ -168,7 +207,10 @@ export default function Role() {
                     {item.role}
                   </span>
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 flex gap-2">
+                  <button onClick={() => handleEdit(item)} disabled={loading}>
+                    <AiFillEdit className="text-blue-400 text-2xl hover:text-blue-600 transition-colors" />
+                  </button>
                   <button
                     onClick={() => handleDelete(item.id)}
                     disabled={loading}
