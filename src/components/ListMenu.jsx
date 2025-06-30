@@ -40,25 +40,25 @@ export default function ListMenu() {
         <li>
           <NavLink to="/Reservasi" className={menuClass}>
             <RiServiceFill className="text-lg" />
-            Reservasi
+            Pemesanan
           </NavLink>
         </li>
         <li>
           <NavLink to="/RoomsList" className={menuClass}>
             <BsPersonWorkspace className="text-lg" />
-            Rooms List
+            Ruangan
           </NavLink>
         </li>
         <li>
           <NavLink to="/TeamManagement" className={menuClass}>
             <AiOutlineTeam className="text-lg" />
-            Team Management
+            Team
           </NavLink>
         </li>
         <li>
           <NavLink to="/Review" className={menuClass}>
             <MdRateReview className="text-lg" />
-            Review Pelanggan
+            Ulasan
           </NavLink>
         </li>
         <li>
@@ -82,25 +82,25 @@ export default function ListMenu() {
         <li>
           <NavLink to="/KontakMasuk" className={menuClass}>
             <AiOutlineContacts className="text-lg" />
-            Kontak Masuk
+            Kontak
           </NavLink>
         </li>
         <li>
           <NavLink to="/Role" className={menuClass}>
             <RiAdminFill className="text-lg" />
-            Role Management
+            Peran
           </NavLink>
         </li>
         <li>
           <NavLink to="/CompanyProfile" className={menuClass}>
             <RiProfileLine className="text-lg" />
-            Company Profile
+            Profil
           </NavLink>
         </li>
         <li>
           <NavLink to="/MediaGallery" className={menuClass}>
             <MdPermMedia className="text-lg" />
-            Media Gallery
+            Media
           </NavLink>
         </li>
       </ul>
