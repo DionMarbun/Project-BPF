@@ -64,17 +64,11 @@ export default function CompanyProfile() {
       setLoading(true)
       setError("")
       const data = await companyProfileAPI.fetchProfiles()
-      console.log("Hasil fetchProfiles:", data)
-
-      if (!Array.isArray(data)) {
-        throw new Error("Format data tidak valid")
-      }
-
-      setProfiles(data)
+      setProfiles(Array.isArray(data) ? data : [])
     } catch (err) {
       console.error("Gagal memuat profil:", err)
       setError(err?.response?.data?.message || err.message || "Gagal memuat data profil")
-      setProfiles([]) // Kosongkan agar UI tidak freeze
+      setProfiles([])
     } finally {
       setLoading(false)
     }
@@ -126,7 +120,7 @@ export default function CompanyProfile() {
   }, [])
 
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-5xl mx-auto p-6 space-y-6">
       <div className="bg-white rounded-2xl shadow-lg p-6">
         <h2 className="text-2xl font-semibold mb-4">
           {editingId ? "Edit Profil Perusahaan" : "Tambah Profil Perusahaan"}
@@ -209,15 +203,17 @@ export default function CompanyProfile() {
 
         {!loading && profiles.length > 0 && (
           <GenericTable
-            columns={["#", "Nama", "Telepon", "Email", "Aksi"]}
+            columns={["#", "Nama", "Deskripsi", "Alamat", "Telepon", "Email", "Aksi"]}
             data={profiles}
             renderRow={(item, index) => (
               <>
-                <td className="px-6 py-4">{index + 1}</td>
-                <td className="px-6 py-4">{item.nama}</td>
-                <td className="px-6 py-4">{item.telepon}</td>
-                <td className="px-6 py-4">{item.email}</td>
-                <td className="px-6 py-4 space-x-3 flex items-center">
+                <td className="px-6 py-4 align-top">{index + 1}</td>
+                <td className="px-6 py-4 align-top">{item.nama}</td>
+                <td className="px-6 py-4 align-top whitespace-pre-line">{item.deskripsi}</td>
+                <td className="px-6 py-4 align-top whitespace-pre-line">{item.alamat}</td>
+                <td className="px-6 py-4 align-top">{item.telepon}</td>
+                <td className="px-6 py-4 align-top">{item.email}</td>
+                <td className="px-6 py-4 space-x-3 flex items-start">
                   <button onClick={() => handleEdit(item)} disabled={loading}>
                     <AiFillEdit className="text-blue-500 text-xl hover:text-blue-700" />
                   </button>
