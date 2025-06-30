@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const dataLowongan = [
+const initialData = [
   {
     posisi: "Customer Service",
     lokasi: "Graha Pena Pekanbaru",
@@ -29,22 +29,58 @@ const dataLowongan = [
 
 const LowonganList = () => {
   const [search, setSearch] = useState("");
+  const [data, setData] = useState(initialData);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editForm, setEditForm] = useState({
+    posisi: "",
+    lokasi: "",
+    tanggalDibuka: "",
+    tipe: "",
+  });
 
-  const filtered = dataLowongan.filter((item) =>
+  const handleEdit = (index) => {
+    setEditIndex(index);
+    setEditForm({ ...data[index] });
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSave = () => {
+    const updatedData = [...data];
+    updatedData[editIndex] = { ...editForm };
+    setData(updatedData);
+    setEditIndex(null);
+  };
+
+  const handleCancel = () => {
+    setEditIndex(null);
+  };
+
+  const handleDelete = (index) => {
+    const confirm = window.confirm("Yakin ingin menghapus lowongan ini?");
+    if (!confirm) return;
+    const newData = data.filter((_, i) => i !== index);
+    setData(newData);
+  };
+
+  const filtered = data.filter((item) =>
     item.posisi.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
-    <div className="bg-blue-50 p-6 pt-24 min-h-screen font-[Poppins]">
-      <div className="bg-white rounded-xl shadow p-6 border border-blue-100">
+    <div className="bg-white p-6 pt-24 min-h-screen font-[Poppins]">
+      <div className="bg-white rounded-xl shadow p-6 border border-gray-200">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
-          <h2 className="text-2xl font-semibold text-blue-700">
+          <h2 className="text-2xl font-semibold text-gray-800">
             Daftar Lowongan Pekerjaan
           </h2>
           <input
             type="text"
             placeholder="Cari posisi..."
-            className="border border-blue-300 bg-white focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full sm:w-72"
+            className="border border-gray-300 bg-white focus:ring-2 focus:ring-blue-400 px-4 py-2 rounded-md w-full sm:w-72"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -52,7 +88,7 @@ const LowonganList = () => {
 
         <div className="overflow-x-auto">
           <table className="min-w-full text-sm">
-            <thead className="bg-white text-blue-600 border-b border-blue-100">
+            <thead className="bg-white text-gray-700 border-b border-gray-200">
               <tr>
                 <th className="text-left p-4 font-semibold">Posisi</th>
                 <th className="text-left p-4 font-semibold">Lokasi</th>
@@ -65,20 +101,83 @@ const LowonganList = () => {
               {filtered.map((item, idx) => (
                 <tr
                   key={idx}
-                  className="border-t border-blue-100 hover:bg-blue-50 transition"
+                  className="border-t border-gray-200 hover:bg-gray-50 transition"
                 >
-                  <td className="p-4 text-blue-700">{item.posisi}</td>
-                  <td className="p-4 text-gray-700">{item.lokasi}</td>
-                  <td className="p-4 text-gray-700">{item.tanggalDibuka}</td>
-                  <td className="p-4 text-gray-700">{item.tipe}</td>
-                  <td className="p-4">
-                    <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2 transition">
-                      Edit
-                    </button>
-                    <button className="bg-blue-50 text-blue-500 px-3 py-1 rounded-md text-sm hover:bg-blue-100 transition">
-                      Hapus
-                    </button>
-                  </td>
+                  {editIndex === idx ? (
+                    <>
+                      <td className="p-4">
+                        <input
+                          type="text"
+                          name="posisi"
+                          value={editForm.posisi}
+                          onChange={handleEditChange}
+                          className="w-full border border-gray-300 px-2 py-1 rounded"
+                        />
+                      </td>
+                      <td className="p-4">
+                        <input
+                          type="text"
+                          name="lokasi"
+                          value={editForm.lokasi}
+                          onChange={handleEditChange}
+                          className="w-full border border-gray-300 px-2 py-1 rounded"
+                        />
+                      </td>
+                      <td className="p-4">
+                        <input
+                          type="date"
+                          name="tanggalDibuka"
+                          value={editForm.tanggalDibuka}
+                          onChange={handleEditChange}
+                          className="w-full border border-gray-300 px-2 py-1 rounded"
+                        />
+                      </td>
+                      <td className="p-4">
+                        <input
+                          type="text"
+                          name="tipe"
+                          value={editForm.tipe}
+                          onChange={handleEditChange}
+                          className="w-full border border-gray-300 px-2 py-1 rounded"
+                        />
+                      </td>
+                      <td className="p-4 space-x-2">
+                        <button
+                          onClick={handleSave}
+                          className="bg-blue-600 text-white px-3 py-1 rounded-md text-sm hover:bg-blue-700 transition"
+                        >
+                          Simpan
+                        </button>
+                        <button
+                          onClick={handleCancel}
+                          className="bg-gray-200 text-gray-700 px-3 py-1 rounded-md text-sm hover:bg-gray-300 transition"
+                        >
+                          Batal
+                        </button>
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="p-4 text-gray-800">{item.posisi}</td>
+                      <td className="p-4 text-gray-700">{item.lokasi}</td>
+                      <td className="p-4 text-gray-700">{item.tanggalDibuka}</td>
+                      <td className="p-4 text-gray-700">{item.tipe}</td>
+                      <td className="p-4 space-x-2">
+                        <button
+                          onClick={() => handleEdit(idx)}
+                          className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 transition"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDelete(idx)}
+                          className="bg-red-100 text-red-600 px-3 py-1 rounded-md text-sm hover:bg-red-200 transition"
+                        >
+                          Hapus
+                        </button>
+                      </td>
+                    </>
+                  )}
                 </tr>
               ))}
               {filtered.length === 0 && (
