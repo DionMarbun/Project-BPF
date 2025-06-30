@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // Ganti URL endpoint sesuai nama tabel reservasi di Supabase
-const API_URL = "https://gupajcdnaawdxmlkewxq.supabase.co/rest/v1/reservasi"
+const API_URL = "https://gupajcdnaawdxmlkewxq.supabase.co/rest/v1/pemesanan"
 const API_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1cGFqY2RuYWF3ZHhtbGtld3hxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDkzNjY5NjMsImV4cCI6MjA2NDk0Mjk2M30.IBCR5tmPPXEx5rTG3GbY1Ovlqts6KTD4rtaSr96uZo4"
 
 const headers = {

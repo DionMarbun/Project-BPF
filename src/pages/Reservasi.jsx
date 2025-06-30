@@ -1,20 +1,21 @@
 import { useEffect, useState } from "react";
-import { reservasiAPI } from "../Service/ReservasiAPI"; 
+import { reservasiAPI } from "../Service/ReservasiAPI";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import AlertBox from "../components/AlertBox";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { FaClipboardList, FaCheckCircle } from "react-icons/fa";
 
 export default function ReservasiAdmin() {
   const [reservasi, setReservasi] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
-    ruangan: "",
-    lantai: "",
-    status: "Tersedia",
-    pelanggan: "",
-    duras: 1,
+    nama: "",
+    email: "",
+    tanggal: "",
+    waktu_mulai: "",
+    waktu_selesai: "",
+    jumlah_orang: 1,
+    total_harga: 0,
   });
   const [editingId, setEditingId] = useState(null);
   const [showForm, setShowForm] = useState(false);
@@ -35,8 +36,27 @@ export default function ReservasiAdmin() {
     loadReservasi();
   }, []);
 
-  const totalBooked = reservasi.filter((d) => d.status === "Booked").length;
-  const totalAvailable = reservasi.filter((d) => d.status !== "Booked").length;
+  useEffect(() => {
+    const { waktu_mulai, waktu_selesai, jumlah_orang } = formData;
+
+    if (waktu_mulai && waktu_selesai && jumlah_orang) {
+      const [startHour, startMinute] = waktu_mulai.split(":").map(Number);
+      const [endHour, endMinute] = waktu_selesai.split(":").map(Number);
+
+      const start = new Date(0, 0, 0, startHour, startMinute);
+      const end = new Date(0, 0, 0, endHour, endMinute);
+
+      let durasi = (end - start) / (1000 * 60 * 60); // hasil jam
+
+      if (durasi > 0) {
+        const hargaPerOrangPerJam = 30000; // bisa kamu sesuaikan
+        const total = durasi * parseInt(jumlah_orang) * hargaPerOrangPerJam;
+        setFormData((prev) => ({ ...prev, total_harga: total }));
+      } else {
+        setFormData((prev) => ({ ...prev, total_harga: 0 }));
+      }
+    }
+  }, [formData.waktu_mulai, formData.waktu_selesai, formData.jumlah_orang]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,7 +74,15 @@ export default function ReservasiAdmin() {
         await reservasiAPI.createReservasi(formData);
         setMessage("Data berhasil ditambahkan");
       }
-      setFormData({ ruangan: "", lantai: "", status: "Tersedia", pelanggan: "", duras: 1 });
+      setFormData({
+        nama: "",
+        email: "",
+        tanggal: "",
+        waktu_mulai: "",
+        waktu_selesai: "",
+        jumlah_orang: 1,
+        total_harga: 0,
+      });
       setEditingId(null);
       setShowForm(false);
       loadReservasi();
@@ -67,11 +95,13 @@ export default function ReservasiAdmin() {
 
   const handleEdit = (item) => {
     setFormData({
-      ruangan: item.ruangan,
-      lantai: item.lantai,
-      status: item.status,
-      pelanggan: item.pelanggan,
-      duras: item.duras,
+      nama: item.nama,
+      email: item.email,
+      tanggal: item.tanggal,
+      waktu_mulai: item.waktu_mulai,
+      waktu_selesai: item.waktu_selesai,
+      jumlah_orang: item.jumlah_orang,
+      total_harga: item.total_harga,
     });
     setEditingId(item.id);
     setShowForm(true);
@@ -93,25 +123,8 @@ export default function ReservasiAdmin() {
     }
   };
 
-  const StatCard = ({ icon, label, value, color }) => (
-    <div className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md">
-      <div className={`${color} text-white p-4 rounded-full`}>{icon}</div>
-      <div className="flex flex-col">
-        <span className="text-2xl font-bold">{value}</span>
-        <span className="text-gray-500">{label}</span>
-      </div>
-    </div>
-  );
-
   return (
     <div className="bg-gray-50 p-6 pt-24 min-h-screen">
-      {/* Statistik */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
-        <StatCard icon={<FaClipboardList className="text-3xl" />} label="Total Reservasi" value={reservasi.length} color="bg-blue-500" />
-        <StatCard icon={<FaCheckCircle className="text-3xl" />} label="Sudah Dipesan" value={totalBooked} color="bg-red-500" />
-        <StatCard icon={<FaCheckCircle className="text-3xl" />} label="Tersedia" value={totalAvailable} color="bg-green-500" />
-      </div>
-
       <div className="bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold">Manajemen Reservasi</h2>
@@ -124,17 +137,111 @@ export default function ReservasiAdmin() {
         </div>
 
         {showForm && (
-          <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <input type="text" name="ruangan" value={formData.ruangan} onChange={handleChange} placeholder="Nama Ruangan" required className="p-3 border rounded-xl" />
-            <input type="text" name="lantai" value={formData.lantai} onChange={handleChange} placeholder="Lantai" required className="p-3 border rounded-xl" />
-            <select name="status" value={formData.status} onChange={handleChange} className="p-3 border rounded-xl">
-              <option value="Tersedia">Tersedia</option>
-              <option value="Booked">Sudah Dipesan</option>
-            </select>
-            <input type="text" name="pelanggan" value={formData.pelanggan} onChange={handleChange} placeholder="Nama Pelanggan" className="p-3 border rounded-xl" />
-            <input type="number" name="duras" value={formData.duras} onChange={handleChange} placeholder="Durasi (jam)" min="1" className="p-3 border rounded-xl" />
-            <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl col-span-full">
-              {editingId ? "Update Data" : "Tambah Data"}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block font-semibold mb-1">Nama Lengkap</label>
+              <input
+                type="text"
+                name="nama"
+                value={formData.nama}
+                onChange={handleChange}
+                placeholder="Masukkan nama lengkap Anda"
+                required
+                className="w-full border rounded-lg p-3"
+              />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Contoh: emailanda@gmail.com"
+                required
+                className="w-full border rounded-lg p-3"
+              />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">
+                Tanggal Pemesanan
+              </label>
+              <input
+                type="date"
+                name="tanggal"
+                value={formData.tanggal}
+                onChange={handleChange}
+                required
+                className="w-full border rounded-lg p-3"
+              />
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">Waktu Mulai</label>
+              <input
+                type="time"
+                name="waktu_mulai"
+                value={formData.waktu_mulai}
+                onChange={handleChange}
+                required
+                className="w-full border rounded-lg p-3"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Pilih waktu mulai pemesanan
+              </p>
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">Waktu Selesai</label>
+              <input
+                type="time"
+                name="waktu_selesai"
+                value={formData.waktu_selesai}
+                onChange={handleChange}
+                required
+                className="w-full border rounded-lg p-3"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Pilih waktu selesai pemesanan
+              </p>
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">Jumlah Orang</label>
+              <input
+                type="number"
+                name="jumlah_orang"
+                value={formData.jumlah_orang}
+                onChange={handleChange}
+                min="1"
+                required
+                className="w-full border rounded-lg p-3"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Jumlah peserta yang akan hadir
+              </p>
+            </div>
+
+            <div>
+              <label className="block font-semibold mb-1">Total Harga</label>
+              <input
+                type="text"
+                value={`Rp${formData.total_harga.toLocaleString("id-ID")}`}
+                readOnly
+                className="w-full bg-gray-100 border rounded-lg p-3"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Total harga otomatis dihitung berdasarkan durasi
+              </p>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg"
+            >
+              {editingId ? "Update Data" : "Kirim Reservasi"}
             </button>
           </form>
         )}
@@ -146,38 +253,39 @@ export default function ReservasiAdmin() {
             <thead className="bg-white text-left border-b border-gray-200">
               <tr>
                 <th className="p-4">#</th>
-                <th className="p-4">Ruangan</th>
-                <th className="p-4">Lantai</th>
-                <th className="p-4">Status</th>
-                <th className="p-4">Pelanggan</th>
-                <th className="p-4">Durasi</th>
+                <th className="p-4">Nama</th>
+                <th className="p-4">Email</th>
+                <th className="p-4">Tanggal</th>
+                <th className="p-4">Mulai</th>
+                <th className="p-4">Selesai</th>
+                <th className="p-4">Orang</th>
+                <th className="p-4">Harga</th>
                 <th className="p-4">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan="7" className="p-4 text-center">
+                  <td colSpan="9" className="p-4 text-center">
                     <LoadingSpinner text="Memuat data..." />
                   </td>
                 </tr>
               ) : reservasi.length > 0 ? (
                 reservasi.map((item, index) => (
-                  <tr key={item.id} className="border-b border-gray-200 hover:bg-white">
+                  <tr
+                    key={item.id}
+                    className="border-b border-gray-200 hover:bg-white"
+                  >
                     <td className="p-4">{index + 1}</td>
-                    <td className="p-4">{item.ruangan}</td>
-                    <td className="p-4">{item.lantai}</td>
+                    <td className="p-4">{item.nama}</td>
+                    <td className="p-4">{item.email}</td>
+                    <td className="p-4">{item.tanggal}</td>
+                    <td className="p-4">{item.waktu_mulai}</td>
+                    <td className="p-4">{item.waktu_selesai}</td>
+                    <td className="p-4">{item.jumlah_orang}</td>
                     <td className="p-4">
-                      <span className={`px-3 py-1 text-xs font-semibold rounded-full ${
-                        item.status === "Booked"
-                          ? "bg-red-100 text-red-600"
-                          : "bg-green-100 text-green-600"
-                      }`}>
-                        {item.status === "Booked" ? "Sudah Dipesan" : "Tersedia"}
-                      </span>
+                      Rp {item.total_harga.toLocaleString("id-ID")}
                     </td>
-                    <td className="p-4">{item.pelanggan || "-"}</td>
-                    <td className="p-4">{item.duras} jam</td>
                     <td className="p-4 flex gap-2">
                       <button onClick={() => handleEdit(item)}>
                         <AiFillEdit className="text-blue-500 hover:text-blue-700 text-xl" />
@@ -190,7 +298,7 @@ export default function ReservasiAdmin() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="7" className="p-4 text-center text-gray-500">
+                  <td colSpan="9" className="p-4 text-center text-gray-500">
                     Tidak ada data reservasi
                   </td>
                 </tr>
