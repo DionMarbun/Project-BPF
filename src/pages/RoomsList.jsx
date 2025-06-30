@@ -38,7 +38,7 @@ export default function RoomsList() {
   const totalAvailable = totalRooms - totalBooked;
 
   return (
-    <div className="pt-24 p-6 max-w-7xl mx-auto font-[Poppins] bg-gray min-h-screen">
+    <div className="pt-6 p-6 max-w-7xl mx-auto font-[Poppins] bg-gray min-h-screen">
       {/* Statistik */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-6">
         <StatCard

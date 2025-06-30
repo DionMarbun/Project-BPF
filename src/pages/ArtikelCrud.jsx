@@ -65,7 +65,7 @@ const ArtikelListWithEdit = () => {
   };
 
   return (
-    <div className="bg-gray-100 p-6 pt-24 min-h-screen">
+    <div className="bg-gray-100 p-6 pt-6 min-h-screen">
       <div className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-4xl mx-auto border border-blue-200">
         <h2 className="text-2xl font-bold text-blue-700 mb-6">
           {editIndex !== null ? "Edit Artikel" : "Tambah Artikel"}

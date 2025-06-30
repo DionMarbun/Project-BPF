@@ -84,7 +84,7 @@ const ReviewPelanggan = () => {
   );
 
   return (
-    <div className="bg-gray p-6 pt-24 min-h-screen font-[Poppins]">
+    <div className="bg-gray p-6 pt-6 min-h-screen font-[Poppins]">
       <div className="bg-white rounded-xl shadow p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-semibold text-blue-700">

@@ -71,7 +71,7 @@ const LowonganList = () => {
   );
 
   return (
-    <div className="bg-gray p-6 pt-24 min-h-screen font-[Poppins]">
+    <div className="bg-gray p-6 pt-6 min-h-screen font-[Poppins]">
       <div className="bg-white rounded-xl shadow p-6 border border-gray-200">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
           <h2 className="text-2xl font-semibold text-gray-800">
