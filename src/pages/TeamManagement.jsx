@@ -8,6 +8,7 @@ const TeamManagement = () => {
   const [error, setError] = useState("");
 
   const [showForm, setShowForm] = useState(false);
+  const [editId, setEditId] = useState(null); // 👉 Tambah edit mode
   const [formData, setFormData] = useState({
     name: "",
     position: "",
@@ -37,13 +38,31 @@ const TeamManagement = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await teams.createTeams(formData);
+      if (editId) {
+        // Update mode
+        await teams.updateTeams(editId, formData);
+      } else {
+        // Tambah baru
+        await teams.createTeams(formData);
+      }
+      // Reset form
       setFormData({ name: "", position: "", photo: "" });
+      setEditId(null);
       setShowForm(false);
       fetchData();
     } catch (err) {
-      alert("Gagal menambahkan tim.");
+      alert("Gagal menyimpan data tim.");
     }
+  };
+
+  const handleEdit = (item) => {
+    setFormData({
+      name: item.name,
+      position: item.position,
+      photo: item.photo,
+    });
+    setEditId(item.id);
+    setShowForm(true);
   };
 
   const filtered = data.filter((item) =>
@@ -64,7 +83,11 @@ const TeamManagement = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => {
+                setShowForm(!showForm);
+                setFormData({ name: "", position: "", photo: "" });
+                setEditId(null); // reset edit mode
+              }}
               className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
             >
               {showForm ? "Tutup Form" : "Tambah Tim"}
@@ -105,7 +128,7 @@ const TeamManagement = () => {
               type="submit"
               className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl"
             >
-              Simpan Tim
+              {editId ? "Simpan Perubahan" : "Simpan Tim"}
             </button>
           </form>
         )}
@@ -138,9 +161,14 @@ const TeamManagement = () => {
                     </td>
                     <td className="p-4">{item.name}</td>
                     <td className="p-4">{item.position}</td>
-                    <td className="p-4">{new Date(item.created_at).toLocaleDateString()}</td>
                     <td className="p-4">
-                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2">
+                      {new Date(item.created_at).toLocaleDateString()}
+                    </td>
+                    <td className="p-4">
+                      <button
+                        onClick={() => handleEdit(item)}
+                        className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2"
+                      >
                         Edit
                       </button>
                       <button
