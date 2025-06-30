@@ -35,7 +35,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen p-6 text-gray-800 font-poppins">
+    <div className="bg-gray min-h-screen p-6 text-gray-800 font-poppins">
       <div className="flex justify-end mb-6">
         <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
           Create booking

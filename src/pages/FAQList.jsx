@@ -67,7 +67,7 @@ const FAQList = () => {
   );
 
   return (
-    <div className="bg-white p-6 pt-24 min-h-screen font-[Poppins]">
+    <div className="bg-gray p-6 pt-24 min-h-screen font-[Poppins]">
       <div className="bg-white rounded-xl shadow p-6 border border-blue-100">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
           <h2 className="text-2xl font-semibold text-blue-700">
