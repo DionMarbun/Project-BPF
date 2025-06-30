@@ -8,11 +8,11 @@ const ReviewPelanggan = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [showForm, setShowForm] = useState(false);
+  const [editId, setEditId] = useState(null); // ID untuk edit mode
   const [newTestimoni, setNewTestimoni] = useState({
     name: "",
     role: "",
     comment: "",
-    rating: "",
     created_at: "",
   });
 
@@ -34,18 +34,25 @@ const ReviewPelanggan = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await testimonis.createTestimonis(newTestimoni);
+      if (editId) {
+        // Edit mode
+        await testimonis.updateTestimonis(editId, newTestimoni);
+      } else {
+        // Create mode
+        await testimonis.createTestimonis(newTestimoni);
+      }
+
       setNewTestimoni({
         name: "",
         role: "",
         comment: "",
-        rating: "",
         created_at: "",
       });
       setShowForm(false);
+      setEditId(null);
       fetchData();
     } catch (err) {
-      alert("Gagal menambahkan testimoni.");
+      alert("Gagal menyimpan testimoni.");
     }
   };
 
@@ -55,10 +62,21 @@ const ReviewPelanggan = () => {
 
     try {
       await testimonis.deleteTestimonis(id);
-      fetchData(); // refresh data
+      fetchData();
     } catch (err) {
       alert("Gagal menghapus testimoni.");
     }
+  };
+
+  const handleEdit = (item) => {
+    setNewTestimoni({
+      name: item.name,
+      role: item.role,
+      comment: item.comment,
+      created_at: item.created_at,
+    });
+    setEditId(item.id);
+    setShowForm(true);
   };
 
   const filtered = data.filter((item) =>
@@ -81,10 +99,19 @@ const ReviewPelanggan = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
             <button
-              onClick={() => setShowForm(!showForm)}
+              onClick={() => {
+                setShowForm(!showForm);
+                setNewTestimoni({
+                  name: "",
+                  role: "",
+                  comment: "",
+                  created_at: "",
+                });
+                setEditId(null); // reset edit mode
+              }}
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
             >
-              Tambah Testimoni
+              {showForm ? "Tutup Form" : "Tambah Testimoni"}
             </button>
           </div>
         </div>
@@ -122,16 +149,6 @@ const ReviewPelanggan = () => {
               required
             />
             <input
-              type="number"
-              placeholder="Rating (1-5)"
-              className="border border-blue-300 px-4 py-2 rounded-md w-full"
-              value={newTestimoni.rating}
-              onChange={(e) =>
-                setNewTestimoni({ ...newTestimoni, rating: e.target.value })
-              }
-              required
-            />
-            <input
               type="date"
               className="border border-blue-300 px-4 py-2 rounded-md w-full"
               value={newTestimoni.created_at}
@@ -147,7 +164,7 @@ const ReviewPelanggan = () => {
               type="submit"
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
             >
-              Simpan
+              {editId ? "Simpan Perubahan" : "Simpan"}
             </button>
           </form>
         )}
@@ -164,7 +181,6 @@ const ReviewPelanggan = () => {
                   <th className="text-left p-4">Nama</th>
                   <th className="text-left p-4">Role</th>
                   <th className="text-left p-4">Komentar</th>
-                  <th className="text-left p-4">Rating</th>
                   <th className="text-left p-4">Tanggal</th>
                   <th className="text-left p-4">Aksi</th>
                 </tr>
@@ -178,10 +194,12 @@ const ReviewPelanggan = () => {
                     <td className="p-4">{item.name}</td>
                     <td className="p-4">{item.role}</td>
                     <td className="p-4">{item.comment}</td>
-                    <td className="p-4">{item.rating} ⭐</td>
                     <td className="p-4">{item.created_at}</td>
                     <td className="p-4">
-                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-3">
+                      <button
+                        onClick={() => handleEdit(item)}
+                        className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-3"
+                      >
                         Edit
                       </button>
                       <button
@@ -195,7 +213,7 @@ const ReviewPelanggan = () => {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan="6" className="text-center p-4 text-blue-500">
+                    <td colSpan="5" className="text-center p-4 text-blue-500">
                       Tidak ada review ditemukan.
                     </td>
                   </tr>
