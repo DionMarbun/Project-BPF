@@ -10,6 +10,7 @@ const FAQList = () => {
 
   const [form, setForm] = useState({ tanya: "", jawab: "" });
   const [showForm, setShowForm] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   useEffect(() => {
     fetchData();
@@ -36,17 +37,29 @@ const FAQList = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await FaqAPI.createFaq(form);
-      setSuccess("FAQ berhasil ditambahkan.");
+      if (editId) {
+        await FaqAPI.updateFaq(editId, form);
+        setSuccess("FAQ berhasil diperbarui.");
+      } else {
+        await FaqAPI.createFaq(form);
+        setSuccess("FAQ berhasil ditambahkan.");
+      }
       setForm({ tanya: "", jawab: "" });
+      setEditId(null);
       setShowForm(false);
       fetchData();
     } catch (err) {
-      setError("Gagal menambahkan FAQ.");
+      setError("Gagal menyimpan FAQ.");
     } finally {
       setLoading(false);
       setTimeout(() => setSuccess(""), 3000);
     }
+  };
+
+  const handleEdit = (item) => {
+    setForm({ tanya: item.tanya, jawab: item.jawab });
+    setEditId(item.id);
+    setShowForm(true);
   };
 
   const filtered = data.filter((item) =>
@@ -71,8 +84,12 @@ const FAQList = () => {
 
         <div className="mb-6">
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
-            onClick={() => setShowForm(!showForm)}
+            className="bg-blue-400 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition"
+            onClick={() => {
+              setShowForm(!showForm);
+              setForm({ tanya: "", jawab: "" });
+              setEditId(null);
+            }}
           >
             {showForm ? "Tutup Form" : "Tambah FAQ"}
           </button>
@@ -100,9 +117,13 @@ const FAQList = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition"
+              className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition"
             >
-              {loading ? "Menyimpan..." : "Simpan FAQ"}
+              {loading
+                ? "Menyimpan..."
+                : editId
+                ? "Simpan Perubahan"
+                : "Simpan FAQ"}
             </button>
           </form>
         )}
@@ -123,15 +144,18 @@ const FAQList = () => {
                 </tr>
               </thead>
               <tbody>
-                {filtered.map((item, idx) => (
+                {filtered.map((item) => (
                   <tr
-                    key={idx}
+                    key={item.id}
                     className="border-t border-blue-100 hover:bg-blue-50 transition"
                   >
                     <td className="p-4 text-blue-800">{item.tanya}</td>
                     <td className="p-4 text-gray-700">{item.jawab}</td>
                     <td className="p-4">
-                      <button className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2 transition">
+                      <button
+                        className="bg-blue-100 text-blue-600 px-3 py-1 rounded-md text-sm hover:bg-blue-200 mr-2 transition"
+                        onClick={() => handleEdit(item)}
+                      >
                         Edit
                       </button>
                       <button

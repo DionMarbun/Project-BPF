@@ -88,7 +88,7 @@ const TeamManagement = () => {
                 setFormData({ name: "", position: "", photo: "" });
                 setEditId(null); // reset edit mode
               }}
-              className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+              className="bg-blue-400 hover:bg-blue-600 text-white px-4 py-2 rounded-md"
             >
               {showForm ? "Tutup Form" : "Tambah Tim"}
             </button>

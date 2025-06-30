@@ -131,7 +131,7 @@ export default function Role() {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition disabled:opacity-50"
+            className="px-6 py-3 bg-blue-400 hover:bg-blue-600 text-white font-semibold rounded-xl transition disabled:opacity-50"
           >
             {loading ? "Menyimpan..." : "Simpan User"}
           </button>

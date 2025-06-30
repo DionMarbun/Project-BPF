@@ -130,7 +130,7 @@ export default function ReservasiAdmin() {
           <h2 className="text-2xl font-semibold">Manajemen Reservasi</h2>
           <button
             onClick={() => setShowForm(!showForm)}
-            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md"
+            className="bg-blue-400 hover:bg-blue-400 text-white px-4 py-2 rounded-md"
           >
             {showForm ? "Tutup Form" : "Tambah Reservasi"}
           </button>

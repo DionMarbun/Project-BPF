@@ -185,7 +185,7 @@ export default function CompanyProfile() {
           <button
             type="submit"
             disabled={loading}
-            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-2xl disabled:opacity-50"
+            className="px-6 py-3 bg-blue-400 hover:bg-blue-600 text-white font-semibold rounded-2xl disabled:opacity-50"
           >
             {loading ? "Menyimpan..." : editingId ? "Perbarui Profil" : "Simpan Profil"}
           </button>
